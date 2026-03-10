@@ -42,7 +42,7 @@ const architectureNodes = [
       { key: "access", val: "IAM role-based" },
       { key: "firewall", val: "security groups" },
       { key: "storage", val: "S3 + EBS" },
-      { key: "provisioning", val: "Terraform" },
+      { key: "provisioning", val: "Ansible" },
     ],
   },
 ];

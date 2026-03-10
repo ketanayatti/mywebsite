@@ -15,8 +15,6 @@ import {
   SiNodedotjs,
   SiMongodb,
   SiMysql,
-  SiKubernetes,
-  SiTerraform,
   SiAnsible,
   SiPrometheus,
   SiGrafana,
@@ -33,10 +31,8 @@ interface Tool {
 
 const tools: Tool[] = [
   { name: "Docker", icon: SiDocker, status: "running", category: "container" },
-  { name: "Kubernetes", icon: SiKubernetes, status: "running", category: "orchestration" },
   { name: "Jenkins", icon: SiJenkins, status: "running", category: "ci/cd" },
   { name: "GitHub Actions", icon: SiGithubactions, status: "running", category: "ci/cd" },
-  { name: "Terraform", icon: SiTerraform, status: "running", category: "iac" },
   { name: "Ansible", icon: SiAnsible, status: "running", category: "config" },
   { name: "AWS", icon: FaAws, status: "running", category: "cloud" },
   { name: "Linux", icon: SiLinux, status: "running", category: "os" },

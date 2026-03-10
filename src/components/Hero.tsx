@@ -107,7 +107,7 @@ export default function Hero() {
               {[
                 { key: "LOCATION", val: "Bangalore, IN" },
                 { key: "ROLE", val: "DevOps Engineer @ IonIdea" },
-                { key: "STACK", val: "Docker · K8s · Jenkins · Terraform · AWS" },
+                { key: "STACK", val: "Docker · Jenkins · Ansible · AWS" },
                 { key: "STATUS", val: "Open to opportunities" },
               ].map((item) => (
                 <div key={item.key} className="flex gap-3">

@@ -7,7 +7,7 @@ const sysInfo = [
   { key: "OS", val: "Linux (Ubuntu 22.04 LTS)" },
   { key: "Host", val: "AWS EC2 / On-Prem" },
   { key: "Shell", val: "bash 5.1" },
-  { key: "Packages", val: "Docker, K8s, Jenkins, Terraform" },
+  { key: "Packages", val: "Docker, Jenkins, Ansible, AWS" },
   { key: "Uptime", val: "Jan 2026 – present" },
   { key: "Resolution", val: "Production-grade" },
   { key: "CPU", val: "CI/CD Pipeline Automation" },

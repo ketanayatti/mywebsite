@@ -168,7 +168,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 ## 🧰 DevOps Tools Showcased
 
 ```
-Docker · Kubernetes · Jenkins · GitHub Actions · Terraform · Ansible
+Docker · Jenkins · GitHub Actions · Ansible
 AWS · Linux · Nginx · Apache · Bash · Prometheus · Grafana
 Python · JavaScript · Node.js · MongoDB · MySQL
 ```
@@ -202,7 +202,7 @@ ketan@devops
 OS:         Linux (Ubuntu 22.04 LTS)
 Host:       AWS EC2 / On-Prem
 Shell:      bash 5.1
-Packages:   Docker, K8s, Jenkins, Terraform
+Packages:   Docker, Jenkins, Ansible, AWS
 CPU:        CI/CD Pipeline Automation
 Memory:     Container Orchestration
 GPU:        Infrastructure as Code
