@@ -28,20 +28,20 @@ A terminal-inspired, ops-dashboard-themed personal website built with Next.js 16
 
 This isn't a glass-morphism card grid with gradient headings. Every section is designed around real DevOps tools and workflows:
 
-| Section | Inspired By | What It Looks Like |
-|---|---|---|
-| **Hero** | System boot sequence | `[  OK  ]` boot lines + `docker ps` output + live uptime counter |
-| **About** | `neofetch` | ASCII penguin + key-value system info (OS, Host, Shell, Packages...) |
-| **Experience** | `git log --oneline` | Commit hashes, author/date metadata, `feat:`/`fix:` prefixed entries |
-| **Tech Stack** | `systemctl list-units` | Data table with service names, categories, green status dots |
-| **Projects** | `ls -la ~/repos/` | Terminal cards with file-tree features (`├──` `└──`) |
-| **Infrastructure** | CI/CD Pipeline dashboard | Pipeline #247 with ✓ step indicators + config panels |
-| **Principles** | `cat /etc/engineering.conf` | Config file with `[core]` section and key=value pairs |
-| **GitHub** | `gh contrib-graph` | Real contribution chart via GitHub API + animated counters |
-| **Blog** | `cat CHANGELOG.md` | Version-tagged entries (v0.1.0, v0.2.0...) with metric badges |
-| **Contact** | `nmap --open` | PORT/PROTOCOL/HOST/STATE table for reachable endpoints |
-| **Navbar** | Terminal prompt | `ketan@devops:~$` with `/command`-style navigation links |
-| **Footer** | Minimal status bar | Plain text, no icons, no fluff |
+| Section            | Inspired By                 | What It Looks Like                                                   |
+| ------------------ | --------------------------- | -------------------------------------------------------------------- |
+| **Hero**           | System boot sequence        | `[  OK  ]` boot lines + `docker ps` output + live uptime counter     |
+| **About**          | `neofetch`                  | ASCII penguin + key-value system info (OS, Host, Shell, Packages...) |
+| **Experience**     | `git log --oneline`         | Commit hashes, author/date metadata, `feat:`/`fix:` prefixed entries |
+| **Tech Stack**     | `systemctl list-units`      | Data table with service names, categories, green status dots         |
+| **Projects**       | `ls -la ~/repos/`           | Terminal cards with file-tree features (`├──` `└──`)                 |
+| **Infrastructure** | CI/CD Pipeline dashboard    | Pipeline #247 with ✓ step indicators + config panels                 |
+| **Principles**     | `cat /etc/engineering.conf` | Config file with `[core]` section and key=value pairs                |
+| **GitHub**         | `gh contrib-graph`          | Real contribution chart via GitHub API + animated counters           |
+| **Blog**           | `cat CHANGELOG.md`          | Version-tagged entries (v0.1.0, v0.2.0...) with metric badges        |
+| **Contact**        | `nmap --open`               | PORT/PROTOCOL/HOST/STATE table for reachable endpoints               |
+| **Navbar**         | Terminal prompt             | `ketan@devops:~$` with `/command`-style navigation links             |
+| **Footer**         | Minimal status bar          | Plain text, no icons, no fluff                                       |
 
 ---
 
@@ -178,6 +178,7 @@ Python · JavaScript · Node.js · MongoDB · MySQL
 ## 📸 Sections Preview
 
 ### System Boot (Hero)
+
 ```
 [  OK  ] Started container runtime
 [  OK  ] Mounted /dev/portfolio
@@ -194,6 +195,7 @@ monitoring      Up 99.9%
 ```
 
 ### Neofetch (About)
+
 ```
 ketan@devops
 ──────────────────
@@ -208,6 +210,7 @@ Disk:       Cloud Architecture & Monitoring
 ```
 
 ### nmap (Contact)
+
 ```
 $ nmap --open ketan.ayatti
 
