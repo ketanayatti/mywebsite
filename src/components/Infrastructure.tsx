@@ -2,58 +2,48 @@
 
 import { motion } from "framer-motion";
 import SectionWrapper from "./SectionWrapper";
-import { HiArrowRight } from "react-icons/hi";
 
 const pipelineSteps = [
-  { label: "Developer Push", icon: "👨‍💻" },
-  { label: "GitHub", icon: "📦" },
-  { label: "Jenkins", icon: "⚙️" },
-  { label: "Build", icon: "🔨" },
-  { label: "Docker", icon: "🐳" },
-  { label: "Deploy", icon: "🚀" },
-  { label: "Nginx", icon: "🌐" },
-  { label: "Production", icon: "✅" },
+  { label: "git push", status: "passed" as const },
+  { label: "build", status: "passed" as const },
+  { label: "test", status: "passed" as const },
+  { label: "docker build", status: "passed" as const },
+  { label: "push registry", status: "passed" as const },
+  { label: "deploy staging", status: "passed" as const },
+  { label: "health check", status: "passed" as const },
+  { label: "deploy prod", status: "passed" as const },
 ];
 
-const architectureCards = [
+const architectureNodes = [
   {
-    title: "CI/CD Pipeline Architecture",
-    description:
-      "Automated delivery from code commit to production deployment with validation gates at every stage.",
-    details: [
-      "Source control integration",
-      "Automated build & test",
-      "Container image registry",
-      "Staged deployments",
-      "Post-deploy validation",
+    title: "CI/CD Pipeline",
+    config: [
+      { key: "trigger", val: "push to main" },
+      { key: "stages", val: "build → test → deploy" },
+      { key: "registry", val: "Docker Hub" },
+      { key: "rollback", val: "automated" },
+      { key: "validation", val: "health-check post-deploy" },
     ],
-    accent: "#00f5d4",
   },
   {
     title: "Container Infrastructure",
-    description:
-      "Docker Compose orchestration with service isolation, networking, and persistent storage.",
-    details: [
-      "Multi-service composition",
-      "Custom bridge networking",
-      "Volume persistence",
-      "Health checks",
-      "Resource limits",
+    config: [
+      { key: "runtime", val: "Docker + Compose" },
+      { key: "network", val: "custom bridge" },
+      { key: "volumes", val: "persistent bind mounts" },
+      { key: "health", val: "http probes / 10s interval" },
+      { key: "limits", val: "CPU + memory constrained" },
     ],
-    accent: "#6366f1",
   },
   {
     title: "Cloud Architecture",
-    description:
-      "AWS EC2 deployment with security groups, load balancing, and infrastructure as code practices.",
-    details: [
-      "EC2 instance management",
-      "Security group configuration",
-      "S3 artifact storage",
-      "IAM role-based access",
-      "Automated provisioning",
+    config: [
+      { key: "provider", val: "AWS (EC2)" },
+      { key: "access", val: "IAM role-based" },
+      { key: "firewall", val: "security groups" },
+      { key: "storage", val: "S3 + EBS" },
+      { key: "provisioning", val: "Terraform" },
     ],
-    accent: "#f59e0b",
   },
 ];
 
@@ -61,108 +51,74 @@ export default function Infrastructure() {
   return (
     <SectionWrapper id="infrastructure">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-16">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-[#00f5d4] text-sm font-mono tracking-wider uppercase mb-3"
-          >
-            Systems Design
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold"
-          >
-            How I Build{" "}
-            <span className="gradient-text">Production Systems</span>
-          </motion.h2>
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-2 mb-8 text-xs text-[#484f58] uppercase tracking-wider"
+        >
+          <span className="text-[#00f5d4]">#</span> infrastructure
+        </motion.div>
 
-        {/* Pipeline Flow */}
+        {/* Pipeline visualization */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass rounded-2xl p-6 sm:p-8 mb-12"
+          className="panel mb-8"
         >
-          <h3 className="text-lg font-semibold text-[#e2e8f0] mb-6 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#00f5d4]" />
-            CI/CD Pipeline Flow
-          </h3>
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-            {pipelineSteps.map((step, i) => (
-              <motion.div
-                key={step.label}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="flex items-center gap-2 sm:gap-3"
-              >
+          <div className="panel-header">
+            <span className="status-dot online" />
+            <span>Pipeline #247 — main</span>
+            <span className="ml-auto text-[#3fb950]">passed</span>
+          </div>
+          <div className="p-5">
+            <div className="flex flex-wrap gap-2">
+              {pipelineSteps.map((step, i) => (
                 <motion.div
-                  whileHover={{ scale: 1.08, y: -3 }}
-                  className="flex flex-col items-center gap-1.5 p-3 sm:p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all min-w-[80px]"
+                  key={step.label}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06 }}
+                  className="flex items-center gap-2"
                 >
-                  <span className="text-2xl">{step.icon}</span>
-                  <span className="text-xs text-[#94a3b8] font-mono text-center whitespace-nowrap">
-                    {step.label}
-                  </span>
+                  <div className="flex items-center gap-2 px-3 py-2 bg-[#161b22] rounded border border-[#1b2230] text-xs">
+                    <span className="text-[#3fb950]">✓</span>
+                    <span className="text-[#8b949e]">{step.label}</span>
+                  </div>
+                  {i < pipelineSteps.length - 1 && (
+                    <span className="text-[#484f58] hidden sm:inline">→</span>
+                  )}
                 </motion.div>
-                {i < pipelineSteps.length - 1 && (
-                  <HiArrowRight className="text-[#00f5d4] flex-shrink-0 hidden sm:block" />
-                )}
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
         </motion.div>
 
-        {/* Architecture Cards */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {architectureCards.map((card, i) => (
+        {/* Architecture configs */}
+        <div className="grid md:grid-cols-3 gap-4">
+          {architectureNodes.map((node, i) => (
             <motion.div
-              key={card.title}
-              initial={{ opacity: 0, y: 20 }}
+              key={node.title}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.12 }}
-              whileHover={{ y: -5 }}
-              className="glass rounded-2xl p-6 hover:glow-accent transition-all duration-300"
+              transition={{ delay: i * 0.1 }}
+              className="panel hover:border-[#2d3748] transition-colors"
             >
-              <div
-                className="w-10 h-10 rounded-lg mb-4 flex items-center justify-center"
-                style={{ background: `${card.accent}15` }}
-              >
-                <div
-                  className="w-3 h-3 rounded-full"
-                  style={{ background: card.accent }}
-                />
+              <div className="panel-header">
+                <span className="status-dot accent" />
+                {node.title}
               </div>
-              <h3
-                className="text-lg font-semibold mb-2"
-                style={{ color: card.accent }}
-              >
-                {card.title}
-              </h3>
-              <p className="text-sm text-[#94a3b8] mb-4 leading-relaxed">
-                {card.description}
-              </p>
-              <ul className="space-y-1.5">
-                {card.details.map((d) => (
-                  <li
-                    key={d}
-                    className="flex items-center gap-2 text-xs text-[#64748b]"
-                  >
-                    <span
-                      className="w-1 h-1 rounded-full flex-shrink-0"
-                      style={{ background: card.accent }}
-                    />
-                    {d}
-                  </li>
+              <div className="p-4 space-y-2 text-xs">
+                {node.config.map((c) => (
+                  <div key={c.key} className="flex gap-2">
+                    <span className="text-[#484f58] w-24 flex-shrink-0">{c.key}</span>
+                    <span className="text-[#8b949e]">{c.val}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </motion.div>
           ))}
         </div>

@@ -2,94 +2,105 @@
 
 import { motion } from "framer-motion";
 import SectionWrapper from "./SectionWrapper";
-import { HiMail } from "react-icons/hi";
-import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 
-const socials = [
+const endpoints = [
   {
-    name: "Email",
-    icon: HiMail,
+    protocol: "mailto",
+    host: "kethanayatti333@gmail.com",
     href: "mailto:kethanayatti333@gmail.com",
-    label: "kethanayatti333@gmail.com",
-    accent: "#00f5d4",
+    status: "open",
   },
   {
-    name: "LinkedIn",
-    icon: FaLinkedinIn,
+    protocol: "https",
+    host: "linkedin.com/in/ketanayatti",
     href: "https://linkedin.com/in/ketanayatti",
-    label: "linkedin.com/in/ketanayatti",
-    accent: "#0077b5",
+    status: "open",
   },
   {
-    name: "GitHub",
-    icon: FaGithub,
+    protocol: "https",
+    host: "github.com/ketanayatti",
     href: "https://github.com/ketanayatti",
-    label: "github.com/ketanayatti",
-    accent: "#e2e8f0",
+    status: "open",
   },
 ];
 
 export default function Contact() {
   return (
     <SectionWrapper id="contact">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-        <motion.p
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-[#00f5d4] text-sm font-mono tracking-wider uppercase mb-3"
+          className="flex items-center gap-2 mb-8 text-xs text-[#484f58] uppercase tracking-wider"
         >
-          Get In Touch
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6"
-        >
-          Let&apos;s Build{" "}
-          <span className="gradient-text">Scalable Infrastructure</span>
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-[#94a3b8] text-lg max-w-2xl mx-auto mb-12"
-        >
-          I&apos;m always open to discussing DevOps challenges, infrastructure
-          architecture, and new opportunities. Let&apos;s connect.
-        </motion.p>
+          <span className="text-[#00f5d4]">#</span> contact
+        </motion.div>
 
-        <div className="grid sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
-          {socials.map((s, i) => (
-            <motion.a
-              key={s.name}
-              href={s.href}
-              target={s.name !== "Email" ? "_blank" : undefined}
-              rel={s.name !== "Email" ? "noopener noreferrer" : undefined}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ y: -5, scale: 1.02 }}
-              className="glass rounded-2xl p-6 hover:glow-accent transition-all duration-300 group"
-            >
-              <div
-                className="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center transition-colors"
-                style={{ background: `${s.accent}15` }}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="terminal"
+        >
+          <div className="terminal-bar">
+            <div className="flex gap-1.5">
+              <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+              <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
+              <span className="w-3 h-3 rounded-full bg-[#28c840]" />
+            </div>
+            <span className="text-[11px] text-[#484f58] ml-2">
+              connect — endpoints
+            </span>
+          </div>
+          <div className="terminal-body">
+            <p className="comment">
+              # Open to discussing DevOps challenges, infrastructure
+            </p>
+            <p className="comment"># architecture, and new opportunities.</p>
+            <p className="mt-3">
+              <span className="prompt">$ </span>
+              <span className="cmd">nmap --open ketan.ayatti</span>
+            </p>
+            <p className="mt-2 text-[#484f58] text-xs">
+              PORT{"\t\t"}PROTOCOL{"\t"}HOST{"\t\t\t\t\t\t"}STATE
+            </p>
+
+            {endpoints.map((ep, i) => (
+              <motion.div
+                key={ep.host}
+                initial={{ opacity: 0, x: -5 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 + i * 0.1 }}
               >
-                <s.icon
-                  size={24}
-                  className="group-hover:scale-110 transition-transform"
-                  style={{ color: s.accent }}
-                />
-              </div>
-              <p className="font-semibold text-[#e2e8f0] mb-1">{s.name}</p>
-              <p className="text-xs text-[#64748b] break-all">{s.label}</p>
-            </motion.a>
-          ))}
-        </div>
+                <a
+                  href={ep.href}
+                  target={ep.protocol === "https" ? "_blank" : undefined}
+                  rel={ep.protocol === "https" ? "noopener noreferrer" : undefined}
+                  className="block hover:bg-[#00f5d4]/5 -mx-2 px-2 py-0.5 rounded transition-colors group"
+                >
+                  <span className="text-[#484f58]">
+                    {ep.protocol === "mailto" ? "25" : "443"}
+                  </span>
+                  {"\t\t"}
+                  <span className="text-[#8b949e]">{ep.protocol}</span>
+                  {"\t\t"}
+                  <span className="text-[#c9d1d9] group-hover:text-[#00f5d4] transition-colors">
+                    {ep.host}
+                  </span>
+                  {"\t"}
+                  <span className="text-[#3fb950]">{ep.status}</span>
+                </a>
+              </motion.div>
+            ))}
+
+            <p className="mt-4">
+              <span className="prompt">$ </span>
+              <span className="blink text-[#00f5d4]">_</span>
+            </p>
+          </div>
+        </motion.div>
       </div>
     </SectionWrapper>
   );

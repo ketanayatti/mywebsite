@@ -2,20 +2,21 @@
 
 import { motion } from "framer-motion";
 import SectionWrapper from "./SectionWrapper";
-import { HiBriefcase } from "react-icons/hi";
 
 const experiences = [
   {
+    hash: "a3f8c21",
     role: "DevOps Engineer Intern",
     company: "IonIdea",
     location: "Bangalore",
     period: "Jan 2026 – Present",
+    branch: "main",
     contributions: [
-      "Built Jenkins CI/CD pipeline automating build and deployment workflows",
-      "Containerized services using Docker and Docker Compose",
-      "Configured Apache reverse proxy and virtual hosts",
-      "Implemented Linux hardening and automated backups",
-      "Implemented centralized logging for production systems",
+      "feat: built Jenkins CI/CD pipeline automating build and deployment workflows",
+      "feat: containerized services using Docker and Docker Compose",
+      "fix: configured Apache reverse proxy and virtual hosts",
+      "security: implemented Linux hardening and automated backups",
+      "feat: implemented centralized logging for production systems",
     ],
   },
 ];
@@ -24,75 +25,86 @@ export default function Experience() {
   return (
     <SectionWrapper id="experience">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-16">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-[#00f5d4] text-sm font-mono tracking-wider uppercase mb-3"
-          >
-            Career
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold"
-          >
-            Work <span className="gradient-text">Experience</span>
-          </motion.h2>
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-2 mb-8 text-xs text-[#484f58] uppercase tracking-wider"
+        >
+          <span className="text-[#00f5d4]">#</span> experience
+        </motion.div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-[#00f5d4] via-[#6366f1] to-transparent" />
+        {/* Git log header */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-xs text-[#484f58] mb-4"
+        >
+          $ git log --oneline --graph
+        </motion.div>
 
+        {/* Commits */}
+        <div className="space-y-6">
           {experiences.map((exp, i) => (
             <motion.div
               key={`${exp.company}-${i}`}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.2 }}
-              className="relative pl-20 pb-12"
+              transition={{ delay: i * 0.15 }}
+              className="panel"
             >
-              {/* Timeline dot */}
-              <div className="absolute left-[22px] top-1 w-[13px] h-[13px] rounded-full border-2 border-[#00f5d4] bg-[#0a0a0a]">
-                <div className="absolute inset-1 rounded-full bg-[#00f5d4] animate-pulse" />
+              {/* Commit header */}
+              <div className="panel-header">
+                <span className="status-dot accent" />
+                <span className="text-[#f0883e]">{exp.hash}</span>
+                <span className="text-[#484f58]">—</span>
+                <span className="text-[#c9d1d9]">{exp.role}</span>
+                <span className="ml-auto text-[10px] px-2 py-0.5 rounded bg-[#00f5d4]/10 text-[#00f5d4]">
+                  {exp.branch}
+                </span>
               </div>
 
-              {/* Card */}
-              <div className="glass rounded-2xl p-6 hover:glow-accent transition-all duration-300">
-                <div className="flex flex-wrap items-center gap-3 mb-3">
-                  <div className="flex items-center gap-2">
-                    <HiBriefcase className="text-[#00f5d4]" />
-                    <h3 className="text-lg font-bold text-[#e2e8f0]">
-                      {exp.role}
-                    </h3>
-                  </div>
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#00f5d4]/10 text-[#00f5d4] text-xs font-mono">
-                    {exp.period}
-                  </span>
+              <div className="p-5">
+                {/* Meta */}
+                <div className="text-xs text-[#484f58] space-y-1 mb-5">
+                  <p>
+                    <span className="text-[#8b949e]">Author:</span> Ketan Ayatti
+                    &lt;kethanayatti333@gmail.com&gt;
+                  </p>
+                  <p>
+                    <span className="text-[#8b949e]">Date:</span> {exp.period}
+                  </p>
+                  <p>
+                    <span className="text-[#8b949e]">Org:</span> {exp.company} •{" "}
+                    {exp.location}
+                  </p>
                 </div>
-                <p className="text-[#94a3b8] text-sm mb-4">
-                  {exp.company} • {exp.location}
-                </p>
 
-                <div className="space-y-2">
-                  {exp.contributions.map((c, ci) => (
-                    <motion.div
-                      key={ci}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 + ci * 0.08 }}
-                      className="flex items-start gap-2.5"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#00f5d4] mt-1.5 flex-shrink-0" />
-                      <span className="text-sm text-[#94a3b8]">{c}</span>
-                    </motion.div>
-                  ))}
+                {/* Contributions as commit messages */}
+                <div className="space-y-2 border-l border-[#1b2230] pl-4">
+                  {exp.contributions.map((c, ci) => {
+                    const colonIdx = c.indexOf(":");
+                    const prefix = c.slice(0, colonIdx);
+                    const message = c.slice(colonIdx + 1);
+                    return (
+                      <motion.div
+                        key={ci}
+                        initial={{ opacity: 0, x: -8 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 + ci * 0.06 }}
+                        className="text-sm flex items-start gap-2"
+                      >
+                        <span className="text-[#3fb950] flex-shrink-0">+</span>
+                        <span>
+                          <span className="text-[#6366f1]">{prefix}:</span>
+                          <span className="text-[#8b949e]">{message}</span>
+                        </span>
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </div>
             </motion.div>
