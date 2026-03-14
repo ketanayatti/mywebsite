@@ -8,6 +8,7 @@ import Projects from "@/components/Projects";
 import Infrastructure from "@/components/Infrastructure";
 import Experience from "@/components/Experience";
 import Principles from "@/components/Principles";
+import Philosophy from "@/components/Philosophy";
 import GitHubActivity from "@/components/GitHubActivity";
 import Blog from "@/components/Blog";
 import Contact from "@/components/Contact";
@@ -24,6 +25,7 @@ export default function Home() {
       <Infrastructure />
       <Experience />
       <TechStack />
+      <Philosophy />
       <Principles />
       <GitHubActivity />
       <Blog />
