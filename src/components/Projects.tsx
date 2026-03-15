@@ -6,6 +6,23 @@ import { FaGithub } from "react-icons/fa";
 
 const projects = [
   {
+    name: "self-hosted-aiops-agent-on-aws",
+    description:
+      "Lightweight AIOps micro-agent running entirely on AWS Free Tier with CPU-based LLM inference using llama.cpp and FastAPI for intelligent tool routing and system automation.",
+    features: [
+      "CPU-optimized LLM inference (TinyLlama 1.1B Q4 quantized)",
+      "Real-time CPU & memory monitoring",
+      "Secure shell command execution layer",
+      "Tool and LLM request routing",
+      "REST API with FastAPI backend",
+      "Zero external paid APIs (fully self-hosted)",
+      "Resource optimization on 1GB RAM (~10-12 tokens/sec)",
+    ],
+    tech: ["AWS EC2", "llama.cpp", "FastAPI", "Python", "TinyLlama"],
+    github: "https://github.com/ketanayatti/Self-Hosted-AIOps-Agent-on-AWS",
+    status: "active",
+  },
+  {
     name: "devops-engineering-portfolio",
     description:
       "Central repository showcasing all DevOps engineering projects with detailed architecture documentation, deployment workflows, and infrastructure diagrams.",
