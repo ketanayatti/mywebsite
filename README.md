@@ -148,6 +148,34 @@ npm start
 
 Open [http://localhost:3000](http://localhost:3000) to view the site.
 
+## 🛠️ Maintenance Mode Toggle
+
+Use a single server-side environment variable to switch the whole portfolio into a maintenance page.
+
+For local development, create a `.env.local` file in the project root and add:
+
+```bash
+MAINTENANCE_MODE=false
+```
+
+- Set it to `true` to show the maintenance page
+- Set it to `false` to show the full portfolio
+- Restart the dev server after changing the value
+
+### Netlify
+
+Set this environment variable in Netlify Site settings:
+
+```bash
+MAINTENANCE_MODE=true
+```
+
+Path: `Site configuration -> Environment variables`
+
+- `true` = maintenance page
+- `false` = normal portfolio
+- If the change does not reflect immediately, trigger a new deploy once
+
 ---
 
 ## ⚙️ Key Features
