@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import SectionWrapper from "./SectionWrapper";
 
 interface GitHubData {
   publicRepos: number;
@@ -69,7 +68,7 @@ export default function GitHubActivity() {
   ];
 
   return (
-    <SectionWrapper id="github">
+    <div>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <p className="text-[#484f58] font-mono text-xs mb-6"># github</p>
 
@@ -127,6 +126,6 @@ export default function GitHubActivity() {
           </div>
         </motion.div>
       </div>
-    </SectionWrapper>
+    </div>
   );
 }

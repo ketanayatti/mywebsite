@@ -10,7 +10,6 @@ const navLinks = [
   { name: "infra", href: "#infrastructure" },
   { name: "experience", href: "#experience" },
   { name: "stack", href: "#techstack" },
-  { name: "philosophy", href: "#philosophy" },
   { name: "blog", href: "#blog" },
   { name: "contact", href: "#contact" },
 ];

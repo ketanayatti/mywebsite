@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import SectionWrapper from "./SectionWrapper";
 
 const endpoints = [
   {
@@ -26,7 +25,7 @@ const endpoints = [
 
 export default function Contact() {
   return (
-    <SectionWrapper id="contact">
+    <div>
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0 }}
@@ -102,6 +101,6 @@ export default function Contact() {
           </div>
         </motion.div>
       </div>
-    </SectionWrapper>
+    </div>
   );
 }
