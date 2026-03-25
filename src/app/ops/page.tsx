@@ -12,29 +12,28 @@ export default function OpsPage() {
   }, []);
   const opsProjects = [
     {
-      title: "Autonomous Self-Healing Infrastructure",
-      description: "AI-powered CI/CD with automated rollbacks and health monitoring.",
-      techs: ["Docker", "Jenkins", "Python", "AWS", "Prometheus"],
-      github: "https://github.com/ketanayatti/auto-healing-infra",
+      title: "Self-Hosted AIOps Agent on AWS EC2",
+      description: "$0/month LLM inference. No OpenAI. No API keys. No cloud AI bill.",
+      techs: ["Python", "FastAPI", "llama.cpp", "AWS EC2", "systemd", "Linux"],
+      github: "https://github.com/ketanayatti/Self-Hosted-AIOps-Agent-on-AWS",
       highlights: [
-        "Automated deployment with rollback on failure",
-        "Real-time health monitoring and alerting",
-        "AI-driven anomaly detection",
-        "Infrastructure as Code (Terraform/CloudFormation)",
-        "Multi-region high availability setup",
+        "On-instance LLM inference — zero external AI API costs",
+        "Stable inference within 1GB RAM via 2GB swap + quantized model",
+        "REST endpoints: /metrics /query /exec /health",
+        "systemd service — survives reboots, production-ready startup",
       ],
     },
     {
-      title: "AI Mock Interview CI/CD Pipeline",
-      description: "Complete DevOps setup for containerized application with automated testing.",
-      techs: ["Docker", "Jenkins", "AWS ECR", "pytest"],
-      github: "https://github.com/ketanayatti/ai-mock-interview-devops",
+      title: "Autonomous Self-Healing Deployment Platform",
+      description: "Deployment platform that detects failure and rolls back automatically. Blue-green strategy. NGINX traffic switching. No humans required at 3am.",
+      techs: ["Docker", "Jenkins", "Python", "AWS", "Prometheus"],
+      github: "https://github.com/ketanayatti/auto-healing-infra",
       highlights: [
-        "Containerized microservices with Docker",
-        "GitOps-style CI/CD pipeline",
-        "Automated unit and integration testing",
-        "Container registry and image management",
-        "Deployment orchestration",
+        "Automated deployment with zero-downtime blue-green strategy",
+        "Health check FAILS → nginx stays on blue, green container killed",
+        "Real-time health monitoring and alerting",
+        "Infrastructure as Code (Terraform/CloudFormation)",
+        "Multi-region high availability setup",
       ],
     },
     {
@@ -45,22 +44,22 @@ export default function OpsPage() {
       highlights: [
         "Service orchestration with Docker Compose",
         "Automated database backup and recovery",
-        "Load balancing and reverse proxy setup",
+        "Load balancing and reverse proxy setup with NGINX",
         "Monitoring with logs and metrics aggregation",
         "Secure credential management",
       ],
     },
     {
-      title: "Self-Hosted AIOps Agent on AWS",
-      description: "Production-grade AIOps micro-agent with local LLM inference on EC2 Free Tier.",
-      techs: ["Python", "FastAPI", "AWS EC2", "llama.cpp", "Docker"],
-      github: "https://github.com/ketanayatti/Self-Hosted-AIOps-Agent-on-AWS",
+      title: "AI Mock Interview CI/CD Pipeline",
+      description: "Complete DevOps setup for containerized application with automated testing.",
+      techs: ["Docker", "Jenkins", "AWS ECR", "pytest"],
+      github: "https://github.com/ketanayatti/ai-mock-interview-devops",
       highlights: [
-        "Live infrastructure monitoring (CPU/memory) via FastAPI",
-        "On-instance LLM inference with llama.cpp (zero external API costs)",
-        "Controlled command execution with whitelisted shell operations",
-        "Tool-first routing for deterministic operations",
-        "Fully self-hosted cloud workload deployment",
+        "Containerized microservices with Docker",
+        "Branch-aware Jenkins pipeline for dev/staging/prod",
+        "Automated unit and integration testing",
+        "Container registry and image management",
+        "Deployment orchestration and health checks",
       ],
     },
   ];
@@ -259,9 +258,9 @@ export default function OpsPage() {
       {/* Contact Section */}
       <section className="bg-[#0d1117] border-t border-[#1b2230]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 text-center">
-          <h2 className="text-lg md:text-xl font-bold text-[#c9d1d9] mb-3">Let&apos;s Build Infrastructure Together</h2>
+          <h2 className="text-lg md:text-xl font-bold text-[#c9d1d9] mb-3">Open to Full-Time Roles</h2>
           <p className="text-xs text-[#8b949e] mb-4 max-w-lg mx-auto">
-            Looking to discuss DevOps practices, infrastructure design, or CI/CD optimization?
+            Looking for DevOps Engineer / SRE / Cloud Engineer opportunities. Bengaluru, Pune, Hyderabad — or remote. I respond within 24 hours.
           </p>
           <a
             href="mailto:kethanayatti333@gmail.com"

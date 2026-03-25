@@ -13,6 +13,7 @@ export default function DevPage() {
       title: "Communiatec - Full-Stack Collaboration Platform",
       description: "Real-time messaging, collaborative code editor, file vault, and AI suggestions.",
       techs: ["React 18", "Node.js", "Socket.io", "MongoDB", "Google Gemini AI"],
+      deployed: "Jenkins CI/CD · Docker · NGINX · Linux EC2",
       github: "https://github.com/ketanayatti/communiatec",
       highlights: [
         "Real-time messaging with typing indicators",
@@ -26,6 +27,7 @@ export default function DevPage() {
       title: "AI Mock Interview Platform",
       description: "Adaptive interview questions, resume parsing, and performance analytics.",
       techs: ["Node.js", "Express", "MongoDB", "Google Gemini", "PDF Parsing"],
+      deployed: "Branch-aware Jenkins · Docker Compose · Staging + Prod envs",
       github: "https://github.com/ketanayatti/ai-mock-interview",
       highlights: [
         "Adaptive question generation based on experience",
@@ -62,7 +64,9 @@ export default function DevPage() {
       {/* Development Philosophy */}
       <section className="border-b border-[#1b2230]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-          <h2 className="text-lg md:text-xl font-bold text-[#c9d1d9] mb-6">Development Philosophy</h2>
+          <h2 className="text-lg md:text-xl font-bold text-[#c9d1d9] mb-2">Full-Stack Developer</h2>
+          <p className="text-[#8b949e] text-sm mb-6">Full-stack foundations that inform how I think about infrastructure. Every system I deploy, I've also built.</p>
+          
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-[#0d1117] border border-[#1b2230] rounded p-4 space-y-3">
               <h3 className="text-[#00ff41] font-bold text-sm">Core Principles</h3>
@@ -167,6 +171,13 @@ export default function DevPage() {
                     </div>
                   </div>
 
+                  {/* Deployment Info */}
+                  <div className="mb-4">
+                    <p className="text-[#8b949e] text-xs">
+                      <span className="text-[#00ff41] font-bold">Deployed via:</span> {project.deployed}
+                    </p>
+                  </div>
+
                   {/* GitHub Link */}
                   <a
                     href={project.github}
@@ -240,7 +251,7 @@ export default function DevPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 text-center">
           <h2 className="text-lg md:text-xl font-bold text-[#c9d1d9] mb-3">Let's Connect</h2>
           <p className="text-xs text-[#8b949e] mb-4 max-w-lg mx-auto">
-            Interested in chatting about development, architecture, or collaboration?
+            Interested in chatting about development, architecture, or collaboration? I'm actively looking for full-time DevOps / SRE / Cloud roles.
           </p>
           <a
             href="mailto:kethanayatti333@gmail.com"

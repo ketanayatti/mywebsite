@@ -42,14 +42,23 @@ export default function LandingPage() {
                   </h1>
                 </div>
                 <div className="space-y-2">
-                  <p className="text-base sm:text-lg text-amber-100 font-semibold">DevOps Engineer Intern</p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-base sm:text-lg text-amber-100 font-semibold">DevOps Engineer</p>
+                    <span className="flex items-center gap-1 bg-[#1b2230] px-2 py-0.5 rounded text-xs">
+                      <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                      <span className="text-[#8b949e]">Open to Work</span>
+                    </span>
+                  </div>
+                  <p className="text-xs sm:text-sm text-[#8b949e]">IonIdea · Jan 2026 – Present</p>
                   <div className="w-16 h-1 bg-amber-100"></div>
                 </div>
               </div>
 
               {/* Bio */}
               <p className="text-sm sm:text-base text-[#8b949e] leading-relaxed max-w-md">
-                Building production-grade infrastructure, automating deployment pipelines, and architecting scalable systems that power modern applications.
+                I built a deployment platform that detects failure and rolls back automatically — before anyone gets paged.
+                Then I ran an LLM on AWS EC2 for $0/month.
+                That's the kind of problem I enjoy.
               </p>
 
               {/* CTA Buttons */}
@@ -77,8 +86,8 @@ export default function LandingPage() {
               <div className="bg-[#161b22] border border-[#1b2230] rounded p-6 space-y-4">
                 <h3 className="text-amber-100 font-bold text-sm">Current Role</h3>
                 <div className="space-y-2">
-                  <p className="text-[#c9d1d9] font-semibold text-sm">DevOps Engineer Intern</p>
-                  <p className="text-[#8b949e] text-xs">Ionidea • Jan 2025 - Present</p>
+                  <p className="text-[#c9d1d9] font-semibold text-sm">DevOps Engineer</p>
+                  <p className="text-[#8b949e] text-xs">Ionidea • Jan 2026 - Present</p>
                 </div>
                 <p className="text-[#8b949e] text-xs leading-relaxed">
                   Architecting CI/CD pipelines, infrastructure automation, and cloud deployment strategies to ensure production reliability.
@@ -124,21 +133,21 @@ export default function LandingPage() {
             <div className="grid md:grid-cols-2 gap-6">
               {[
                 {
-                  title: "Automation First",
+                  title: "What I Actually Believe",
                   points: [
-                    "Manual processes = technical debt",
-                    "Everything should be version controlled",
-                    "Infrastructure as code is non-negotiable",
-                    "Eliminate repetitive tasks systematically",
+                    "Manual processes are just bugs you haven't automated yet",
+                    "If your deployment needs a human, your deployment isn't done",
+                    "Reliability is an architecture decision — not a monitoring alert",
+                    "Works on my machine is not a deployment strategy",
                   ],
                 },
                 {
-                  title: "Production-Ready Mindset",
+                  title: "Currently Building",
                   points: [
-                    "Assume failure will happen",
-                    "Monitoring and alerting from day one",
-                    "Security integrated, not bolted on",
-                    "Performance optimization continuous",
+                    "Kubernetes & Terraform foundations",
+                    "AWS Solutions Architect Associate (SAA-C03) cert",
+                    "CI/CD pipelines + Docker infra at IonIdea",
+                    "Open to full-time DevOps / SRE / Cloud roles",
                   ],
                 },
               ].map((section, idx) => (
@@ -159,6 +168,39 @@ export default function LandingPage() {
         </div>
       </motion.section>
 
+      {/* Certifications Section */}
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="border-t border-[#1b2230] px-4 sm:px-6 py-16"
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.div variants={itemVariants} className="space-y-6">
+            <div>
+              <h2 className="text-lg md:text-xl font-bold text-[#c9d1d9] mb-3">Certifications</h2>
+              <div className="h-1 w-12 bg-amber-100"></div>
+            </div>
+
+            <div className="bg-[#161b22] border border-[#1b2230] rounded p-6">
+              <ul className="space-y-3">
+                {[
+                  { cert: "Oracle Cloud Infrastructure 2025 AI Foundations", issuer: "Oracle University", status: "✓" },
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2 text-xs text-[#8b949e]">
+                    <span className="text-amber-100 flex-shrink-0 mt-0.5">{item.status}</span>
+                    <div>
+                      <span className="text-[#c9d1d9]">{item.cert}</span>
+                      {item.issuer && <span className="text-[#484f58]"> — {item.issuer}</span>}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+        </div>
+      </motion.section>
+
       {/* Contact Section */}
       <motion.section
         variants={containerVariants}
@@ -169,8 +211,17 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto">
           <motion.div variants={itemVariants} className="space-y-8">
             <div>
-              <h2 className="text-lg md:text-xl font-bold text-[#c9d1d9] mb-3">Connect</h2>
+              <h2 className="text-lg md:text-xl font-bold text-[#c9d1d9] mb-3">Let's Connect</h2>
               <div className="h-1 w-12 bg-amber-100"></div>
+            </div>
+
+            <div className="bg-[#161b22] border border-[#1b2230] rounded p-6 mb-6">
+              <p className="text-[#8b949e] text-sm leading-relaxed">
+                I'm actively looking for full-time DevOps / SRE / Cloud roles. Bengaluru, Pune, Hyderabad — or remote.
+                <br />
+                I respond within 24 hours.
+              </p>
+              <p className="text-[#484f58] text-xs mt-3 font-mono">→ avg response time: &lt; 24 hours</p>
             </div>
 
             <div className="grid sm:grid-cols-3 gap-6">

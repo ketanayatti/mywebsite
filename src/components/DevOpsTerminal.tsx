@@ -13,11 +13,114 @@ const TERMINAL_COMMANDS: Record<
   string,
   { output: string[]; type: "success" | "info" | "error" }
 > = {
+  whoami: {
+    output: [
+      "Ketan Ayatti — DevOps Engineer",
+    ],
+    type: "success",
+  },
+  status: {
+    output: [
+      "actively looking · DevOps / SRE / Cloud",
+      "Bengaluru or Remote · respond within 24hrs",
+    ],
+    type: "success",
+  },
+  "projects --highlight": {
+    output: [
+      "[1] autonomous-self-healing-platform  ·  zero-downtime blue-green deployment",
+      "[2] self-hosted-aiops-agent           ·  $0 LLM inference on AWS EC2 t2.micro",
+      "[3] communiatec-devops-platform       ·  full CI/CD + Docker + NGINX on Linux",
+      "[4] ai-mock-interview                 ·  branch-aware Jenkins pipeline",
+    ],
+    type: "info",
+  },
+  stack: {
+    output: [
+      "docker · jenkins · github-actions · aws-ec2 · nginx · linux · bash · python",
+      "learning: kubernetes · terraform",
+    ],
+    type: "info",
+  },
+  contact: {
+    output: [
+      "kethanayatti333@gmail.com",
+      "linkedin.com/in/ketanayatti",
+      "github.com/ketanayatti",
+    ],
+    type: "info",
+  },
+  aiops: {
+    output: [
+      "Self-Hosted AIOps Agent on AWS EC2",
+      "─────────────────────────────────────",
+      "Problem:  Everyone pays OpenAI. What's the cheapest possible AI agent?",
+      "Solution: TinyLlama 1.1B via llama.cpp on t2.micro (1GB RAM)",
+      "Trick:    2GB swap to fake memory headroom",
+      "Result:   $0/month inference cost. Production-ready via systemd.",
+      "Endpoints: /metrics /query /exec /health",
+      "Repo: github.com/ketanayatti/Self-Hosted-AIOps-Agent-on-AWS",
+    ],
+    type: "success",
+  },
+  selfheal: {
+    output: [
+      "Autonomous Self-Healing Deployment Platform",
+      "─────────────────────────────────────────────",
+      "Strategy: Blue-Green deployment with automated health validation",
+      "Flow:     push → green spins up → health check →",
+      "          PASS: nginx flips traffic, blue retired ✓",
+      "          FAIL: nginx stays on blue, green killed ✗",
+      "Result:   Zero-downtime releases. Zero humans paged at 3am.",
+      "Repo: github.com/ketanayatti/Autonomous-Self-Healing-Deployment-Platform",
+    ],
+    type: "success",
+  },
+  internship: {
+    output: [
+      "DevOps Engineer Intern — IonIdea (Jan 2026 – Present)",
+      "───────────────────────────────────────────────────────",
+      "✓ Hardened Linux servers: SSH key-only, UFW rules, RBAC",
+      "  → eliminated password-based login across all dev instances",
+      "✓ Jenkins CI/CD pipeline: 8-command manual deploy → 1 git push",
+      "✓ Dockerized full-stack app: dev/staging parity achieved",
+      "✓ Bash + cron automated backups: manual DBA effort → zero",
+      "✓ Centralized log rotation: observability improved, storage reduced",
+    ],
+    type: "info",
+  },
+  open: {
+    output: [
+      "STATUS: Open to Work",
+      "─────────────────────",
+      "Roles:     DevOps Engineer · SRE · Cloud Infrastructure Engineer",
+      "           Platform Engineer · Cloud Engineer",
+      "Locations: Bengaluru · Pune · Hyderabad · Remote",
+      "Type:      Full-time",
+      "Start:     Immediately available",
+      "",
+      "Reach out: kethanayatti333@gmail.com",
+    ],
+    type: "success",
+  },
   help: {
     output: [
       "╔══════════════════════════════════════════════════════════╗",
       "║          DEVOPS PLAYGROUND COMMAND REFERENCE             ║",
       "╚══════════════════════════════════════════════════════════╝",
+      "",
+      "📊 QUICK COMMANDS:",
+      "  whoami                   About me",
+      "  status                   Current hiring status",
+      "  projects --highlight     Highlight projects",
+      "  stack                    Tech stack",
+      "  contact                  Contact info",
+      "",
+      "🚀 PROJECT DEEP DIVES:",
+      "  aiops                    Self-Hosted AIOps Agent",
+      "  selfheal                 Self-Healing Platform",
+      "  internship               Current internship at IonIdea",
+      "  open                     Open to Work details",
       "",
       "📦  DEPLOYMENT COMMANDS:",
       "  deploy --env=prod        Deploy to production",
@@ -45,35 +148,6 @@ const TERMINAL_COMMANDS: Record<
       "  help                     Show this help message",
     ],
     type: "info",
-  },
-  status: {
-    output: [
-      "╔══════════════════════════════════════════════════════════╗",
-      "║                  DEPLOYMENT STATUS                       ║",
-      "╚══════════════════════════════════════════════════════════╝",
-      "",
-      "🟢 PRODUCTION",
-      "  Status: OPERATIONAL",
-      "  Version: v1.2.3",
-      "  Uptime: 99.98%",
-      "  Last Deploy: 2 hours ago",
-      "  CPU: 32% | Memory: 45% | Disk: 62%",
-      "",
-      "🟡 STAGING",
-      "  Status: OPERATIONAL",
-      "  Version: v1.3.0-dev",
-      "  Uptime: 99.95%",
-      "  Health Checks: PASSING ✓",
-      "",
-      "🐳 CONTAINERS",
-      "  Frontend: running (2 instances)",
-      "  API: running (3 instances)",
-      "  Database: running (1 instance)",
-      "  Cache: running (1 instance)",
-      "",
-      "✓ All systems operational",
-    ],
-    type: "success",
   },
   "docker ps": {
     output: [
@@ -228,14 +302,15 @@ const TERMINAL_COMMANDS: Record<
       "",
       "👤 PERSONAL INFORMATION:",
       "  Name: Ketan Ayatti",
-      "  Role: DevOps Engineer Intern",
+      "  Role: DevOps Engineer",
       "  Company: Ionidea",
-      "  Location: India",
+      "  Location: Bengaluru, India · Open to Pune, Hyderabad, Remote",
       "  Email: kethanayatti333@gmail.com",
       "",
       "🔗 SOCIAL LINKS:",
       "  GitHub: https://github.com/ketanayatti",
       "  LinkedIn: https://www.linkedin.com/in/ketanayatti",
+      "  Portfolio: ketanayatti.netlify.app",
       "",
       "🎯 EXPERTISE:",
       "  • Docker & Container Orchestration",
@@ -250,49 +325,11 @@ const TERMINAL_COMMANDS: Record<
       "  • Autonomous Self-Healing Infrastructure Platform",
       "  • AI Mock Interview Platform (Full DevOps Setup)",
       "  • Self-Hosted AIOps Agent on AWS EC2",
-      "  • Enterprise Infrastructure Automation",
+      "  • CI/CD setup at IonIdea",
       "",
       "📬 CONTACT ME:",
       "  Ready to discuss DevOps practices, infrastructure design,",
-      "  and CI/CD optimization. Feel free to reach out!",
-    ],
-    type: "info",
-  },
-  whoami: {
-    output: [
-      "╔══════════════════════════════════════════════════════════╗",
-      "║           KETAN AYATTI — DevOps Engineer                  ║",
-      "╚══════════════════════════════════════════════════════════╝",
-      "",
-      "👤 PERSONAL INFORMATION:",
-      "  Name: Ketan Ayatti",
-      "  Role: DevOps Engineer Intern",
-      "  Company: Ionidea",
-      "  Location: India",
-      "  Email: kethanayatti333@gmail.com",
-      "",
-      "🔗 SOCIAL LINKS:",
-      "  GitHub: https://github.com/ketanayatti",
-      "  LinkedIn: https://www.linkedin.com/in/ketanayatti",
-      "",
-      "🎯 EXPERTISE:",
-      "  • Docker & Container Orchestration",
-      "  • CI/CD Pipelines (Jenkins, GitHub Actions)",
-      "  • AWS Cloud Infrastructure",
-      "  • Infrastructure as Code (Terraform)",
-      "  • Linux System Administration",
-      "  • Monitoring & Observability (Prometheus)",
-      "  • Security & Infrastructure Hardening",
-      "",
-      "🚀 NOTABLE WORK:",
-      "  • Autonomous Self-Healing Infrastructure Platform",
-      "  • AI Mock Interview Platform (Full DevOps Setup)",
-      "  • Self-Hosted AIOps Agent on AWS EC2",
-      "  • Enterprise Infrastructure Automation",
-      "",
-      "📬 CONTACT ME:",
-      "  Ready to discuss DevOps practices, infrastructure design,",
-      "  and CI/CD optimization. Feel free to reach out!",
+      "  and CI/CD optimization. Respond within 24 hours.",
     ],
     type: "info",
   },
@@ -307,9 +344,60 @@ export default function DevOpsTerminal() {
   const [input, setInput] = useState("");
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [booted, setBooted] = useState(false);
 
+  // Auto-boot sequence on first load
   useEffect(() => {
-    // Auto scroll to bottom
+    if (typeof window === 'undefined') return;
+    
+    const isBooted = sessionStorage.getItem('terminal-booted');
+    if (!isBooted && !booted) {
+      const bootSequence = [
+        { input: 'whoami', delay: 0 },
+        { input: 'status', delay: 400 },
+        { input: 'projects --highlight', delay: 400 },
+        { input: 'stack', delay: 400 },
+        { input: 'contact', delay: 400 },
+      ];
+
+      let currentIndex = 0;
+      const runBootSequence = () => {
+        if (currentIndex < bootSequence.length) {
+          const cmd = bootSequence[currentIndex];
+          setTimeout(() => {
+            const command = cmd.input.toLowerCase();
+            const result =
+              TERMINAL_COMMANDS[command] || {
+                output: [`command not found: ${cmd.input}`],
+                type: "error" as const,
+              };
+
+            setHistory((prev) => [
+              ...prev,
+              { input: cmd.input, output: result.output, type: result.type },
+            ]);
+
+            currentIndex++;
+            runBootSequence();
+          }, cmd.delay);
+        } else {
+          sessionStorage.setItem('terminal-booted', 'true');
+          setBooted(true);
+          if (inputRef.current) {
+            inputRef.current.focus();
+          }
+        }
+      };
+
+      // Start boot sequence after a short delay
+      setTimeout(() => {
+        runBootSequence();
+      }, 300);
+    }
+  }, [booted]);
+
+  // Auto scroll to bottom
+  useEffect(() => {
     if (terminalRef.current) {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
@@ -343,6 +431,7 @@ export default function DevOpsTerminal() {
   const clearHistory = () => {
     setHistory([]);
     setInput("");
+    sessionStorage.removeItem('terminal-booted');
   };
 
   return (
@@ -424,6 +513,9 @@ export default function DevOpsTerminal() {
                   className="flex-1 bg-transparent text-[#c9d1d9] font-mono text-sm focus:outline-none placeholder-[#484f58]"
                   autoFocus
                 />
+                {input === "" && (
+                  <span className="text-[#00FF41] font-mono text-sm animate-pulse">█</span>
+                )}
               </div>
             </div>
           </div>
@@ -431,7 +523,7 @@ export default function DevOpsTerminal() {
           {/* Help Text */}
           <div className="mt-6 p-4 bg-[#0d1117] border border-[#1b2230] rounded-lg">
             <p className="text-xs text-[#8b949e] font-mono">
-              💡 Try: <span className="text-[#00f5d4]">help</span> • <span className="text-[#00f5d4]">status</span> • <span className="text-[#00f5d4]">deploy --env=prod</span> • <span className="text-[#00f5d4]">docker ps</span> • <span className="text-[#00f5d4]">metrics</span>
+              # try: <span className="text-[#00f5d4]">whoami</span> · <span className="text-[#00f5d4]">aiops</span> · <span className="text-[#00f5d4]">selfheal</span> · <span className="text-[#00f5d4]">internship</span> · <span className="text-[#00f5d4]">open</span> · <span className="text-[#00f5d4]">help</span>
             </p>
           </div>
         </motion.div>

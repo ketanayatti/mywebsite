@@ -6,8 +6,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#484f58]">
           <p>
-            <span className="text-[#8b949e]">ketan.ayatti</span> — devops
-            engineer
+            © 2026 Ketan Ayatti · Engineering reliable systems.
           </p>
           <div className="flex items-center gap-4">
             <a
@@ -33,7 +32,11 @@ export default function Footer() {
               github
             </a>
           </div>
-          <p>&copy; {new Date().getFullYear()}</p>
+          <p>
+            <a href="https://ketanayatti.netlify.app" className="hover:text-[#8b949e] transition-colors">
+              ketanayatti.netlify.app
+            </a>
+          </p>
         </div>
       </div>
     </footer>
