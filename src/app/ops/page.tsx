@@ -263,8 +263,10 @@ export default function OpsPage() {
             Looking for DevOps Engineer / SRE / Cloud Engineer opportunities. Bengaluru, Pune, Hyderabad — or remote. I respond within 24 hours.
           </p>
           <a
-            href="mailto:kethanayatti333@gmail.com"
-            className="inline-block px-4 py-2 border border-[#00ff41] text-[#00ff41] rounded text-xs font-mono hover:bg-[#00ff41] hover:text-[#0f1419] transition"
+            href="https://linkedin.com/in/ketanayatti"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-4 py-2 border border-[#00ff41] text-[#00ff41] rounded text-xs font-mono hover:bg-[#00ff41] hover:text-[#0f1419] transition-all duration-300 hover:scale-105"
           >
             Get in Touch
           </a>

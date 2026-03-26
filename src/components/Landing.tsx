@@ -63,20 +63,26 @@ export default function LandingPage() {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 pt-4">
-                <Link
-                  href="/dev"
-                  className="group inline-flex items-center justify-center gap-2 px-6 py-3 bg-amber-100 text-[#0d1117] font-semibold text-sm hover:bg-amber-200 transition-colors rounded"
-                >
-                  Development
-                  <FaCode size={14} className="group-hover:translate-x-0.5 transition-transform" />
-                </Link>
-                <Link
-                  href="/ops"
-                  className="group inline-flex items-center justify-center gap-2 px-6 py-3 border border-amber-100 text-amber-100 font-semibold text-sm hover:bg-amber-100/10 transition-colors rounded"
-                >
-                  DevOps & Infra
-                  <FaServer size={14} className="group-hover:translate-x-0.5 transition-transform" />
-                </Link>
+                <div className="group">
+                  <Link
+                    href="/dev"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-amber-100 text-[#0d1117] font-semibold text-sm hover:bg-amber-200 hover:scale-105 transition-all duration-300 rounded"
+                  >
+                    Development
+                    <FaCode size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
+                  </Link>
+                  <p className="text-xs text-amber-100/60 italic mt-2 text-center group-hover:text-amber-100/100 transition-colors duration-300">Click here</p>
+                </div>
+                <div className="group">
+                  <Link
+                    href="/ops"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-amber-100 text-amber-100 font-semibold text-sm hover:bg-amber-100/10 hover:scale-105 transition-all duration-300 rounded"
+                  >
+                    DevOps & Infra
+                    <FaServer size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
+                  </Link>
+                  <p className="text-xs text-amber-100/60 italic mt-2 text-center group-hover:text-amber-100/100 transition-colors duration-300">Click here</p>
+                </div>
               </div>
             </motion.div>
 
@@ -120,7 +126,8 @@ export default function LandingPage() {
       <motion.section
         variants={containerVariants}
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
         className="border-t border-[#1b2230] px-4 sm:px-6 py-16"
       >
         <div className="max-w-6xl mx-auto">
@@ -172,7 +179,8 @@ export default function LandingPage() {
       <motion.section
         variants={containerVariants}
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
         className="border-t border-[#1b2230] px-4 sm:px-6 py-16"
       >
         <div className="max-w-6xl mx-auto">
@@ -205,7 +213,8 @@ export default function LandingPage() {
       <motion.section
         variants={containerVariants}
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
         className="border-t border-[#1b2230] px-4 sm:px-6 py-16"
       >
         <div className="max-w-6xl mx-auto">
@@ -252,12 +261,12 @@ export default function LandingPage() {
                     href={contact.href}
                     target={contact.href.startsWith("http") ? "_blank" : undefined}
                     rel={contact.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    whileHover={{ y: -2 }}
-                    className="bg-[#161b22] border border-[#1b2230] rounded p-6 hover:border-amber-100 transition-colors group"
+                    whileHover={{ y: -4, transition: { duration: 0.3 } }}
+                    className="bg-[#161b22] border border-[#1b2230] rounded p-6 hover:border-amber-100 hover:shadow-lg hover:shadow-amber-100/10 transition-all duration-300 group"
                   >
-                    <Icon className="text-amber-100 text-xl mb-3 group-hover:scale-110 transition-transform" />
+                    <Icon className="text-amber-100 text-xl mb-3 group-hover:scale-125 transition-transform duration-300" />
                     <p className="text-[#8b949e] text-xs mb-1">{contact.label}</p>
-                    <p className="text-[#c9d1d9] text-xs font-mono font-semibold break-all hover:text-amber-100 transition-colors">
+                    <p className="text-[#c9d1d9] text-xs font-mono font-semibold break-all hover:text-amber-100 transition-colors duration-300">
                       {contact.value}
                     </p>
                   </motion.a>
