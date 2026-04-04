@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Ketan Ayatti — DevOps Engineer | AWS · Docker · Kubernetes",
   description:
-    "DevOps Engineer building self-healing infrastructure, CI/CD pipelines, and cloud-native systems on AWS. Open to full-time DevOps / SRE / Cloud roles. Based in Bengaluru.",
+    "DevOps Engineer building self-healing infrastructure, CI/CD pipelines, and cloud-native systems on AWS. Open to full-time Full-Stack / DevOps / Cloud roles. Based in Bengaluru.",
   keywords: [
     "DevOps Engineer",
     "SRE",

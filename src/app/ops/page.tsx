@@ -1,277 +1,415 @@
 "use client";
 
 import { useEffect } from "react";
+import { useRef } from "react";
 import DevOpsTerminal from "@/components/DevOpsTerminal";
+import ProjectCard from "@/components/ProjectCard";
 import Link from "next/link";
-import { FaGithub, FaDocker, FaLinux, FaAws } from "react-icons/fa";
-import { SiJenkins, SiPrometheus } from "react-icons/si";
+import { motion } from "framer-motion";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 export default function OpsPage() {
+  const projectRailRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollProjects = (direction: "left" | "right") => {
+    const offset = direction === "left" ? -420 : 420;
+    projectRailRef.current?.scrollBy({ left: offset, behavior: "smooth" });
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const opsProjects = [
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.05 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
+  const projects = [
     {
-      title: "Self-Hosted AIOps Agent on AWS EC2",
-      description: "$0/month LLM inference. No OpenAI. No API keys. No cloud AI bill.",
-      techs: ["Python", "FastAPI", "llama.cpp", "AWS EC2", "systemd", "Linux"],
-      github: "https://github.com/ketanayatti/Self-Hosted-AIOps-Agent-on-AWS",
-      highlights: [
-        "On-instance LLM inference — zero external AI API costs",
-        "Stable inference within 1GB RAM via 2GB swap + quantized model",
-        "REST endpoints: /metrics /query /exec /health",
-        "systemd service — survives reboots, production-ready startup",
+      title: "Communiatec Dev Platform",
+      status: "shipped" as const,
+      problemSolved:
+        "A complex real-time collaboration product needed reliable multi-environment deployment, safe rollouts, and repeatable operations without manual release risk.",
+      solutionDelivered:
+        "Implemented branch-aware CI/CD with Jenkins, containerized services, NGINX reverse proxy routing, PM2 process controls, and production deployment on AWS EC2.",
+      metrics: [
+        "Deployments in < 3 minutes",
+        "99.9% uptime target",
+        "Zero-downtime rolling updates",
+        "Build success rate around 98%",
       ],
+      techStack: [
+        "Jenkins",
+        "Docker",
+        "Docker Compose",
+        "NGINX",
+        "PM2",
+        "AWS EC2",
+        "GitHub",
+      ],
+      impact:
+        "Converted Communiatec from an app-only build into a deployment-ready production system with repeatable release reliability.",
+      githubUrl: "https://github.com/ketanayatti/communiatec",
     },
     {
       title: "Autonomous Self-Healing Deployment Platform",
-      description: "Deployment platform that detects failure and rolls back automatically. Blue-green strategy. NGINX traffic switching. No humans required at 3am.",
-      techs: ["Docker", "Jenkins", "Python", "AWS", "Prometheus"],
-      github: "https://github.com/ketanayatti/auto-healing-infra",
-      highlights: [
-        "Automated deployment with zero-downtime blue-green strategy",
-        "Health check FAILS → nginx stays on blue, green container killed",
-        "Real-time health monitoring and alerting",
-        "Infrastructure as Code (Terraform/CloudFormation)",
-        "Multi-region high availability setup",
+      status: "shipped" as const,
+      problemSolved:
+        "Traditional release workflows can fail silently after cutover, leaving teams with downtime, slow rollback, and manual recovery work.",
+      solutionDelivered:
+        "Built a blue-green deployment platform with an automated watchdog loop, NGINX upstream switching, deterministic state tracking, and rollback on repeated failures.",
+      metrics: [
+        "0 seconds downtime",
+        "< 5 seconds rollback action",
+        "15-20 second failure detection",
+        "Near-zero MTTR",
       ],
+      techStack: [
+        "Fastify",
+        "Docker",
+        "NGINX",
+        "Bash",
+        "Linux",
+        "State file orchestration",
+      ],
+      impact:
+        "Turned release safety into an automated system property with deterministic rollback, zero cutover downtime, and auditable recovery behavior.",
+      githubUrl: "https://github.com/ketanayatti/Autonomous-Self-Healing-Deployment-Platform",
     },
     {
-      title: "Communiatec Infrastructure Automation",
-      description: "End-to-end DevOps for multi-service real-time platform.",
-      techs: ["Docker Compose", "Jenkins", "MongoDB Atlas", "AWS", "Linux"],
-      github: "https://github.com/ketanayatti/communiatec-devops",
-      highlights: [
-        "Service orchestration with Docker Compose",
-        "Automated database backup and recovery",
-        "Load balancing and reverse proxy setup with NGINX",
-        "Monitoring with logs and metrics aggregation",
-        "Secure credential management",
+      title: "AI Mock Interview Platform",
+      status: "shipped" as const,
+      problemSolved:
+        "The AI platform required resilient production deployment with reliable branch-based promotion and minimal downtime under frequent updates.",
+      solutionDelivered:
+        "Implemented multi-branch Jenkins pipelines, Docker Compose environments, and Apache reverse proxy deployment with rolling update behavior.",
+      metrics: [
+        "Deployment time < 3 minutes",
+        "Downtime on update near 0",
+        "Rollback under 1 minute",
+        "Build success rate 98%",
       ],
+      techStack: [
+        "Jenkins",
+        "Docker",
+        "Docker Compose",
+        "Apache",
+        "Linux",
+        "GitHub",
+        "MongoDB",
+      ],
+      impact:
+        "Delivered a stable AI product release pipeline that supports fast iterations while maintaining high operational reliability.",
+      githubUrl: "https://github.com/ketanayatti/ai-mock-interview",
     },
     {
-      title: "AI Mock Interview CI/CD Pipeline",
-      description: "Complete DevOps setup for containerized application with automated testing.",
-      techs: ["Docker", "Jenkins", "AWS ECR", "pytest"],
-      github: "https://github.com/ketanayatti/ai-mock-interview-devops",
-      highlights: [
-        "Containerized microservices with Docker",
-        "Branch-aware Jenkins pipeline for dev/staging/prod",
-        "Automated unit and integration testing",
-        "Container registry and image management",
-        "Deployment orchestration and health checks",
+      title: "Self-Hosted AIOps Agent on AWS EC2",
+      status: "shipped" as const,
+      problemSolved:
+        "Operations teams needed a lightweight incident assistant that could run locally instead of depending on paid hosted AI services.",
+      solutionDelivered:
+        "Built a self-hosted AIOps agent on AWS EC2 with FastAPI endpoints, controlled command execution, and local llama.cpp inference.",
+      metrics: [
+        "Runs on AWS EC2 t2.micro",
+        "$0 external AI API cost",
+        "Whitelisted command execution",
+        "Live CPU and memory monitoring",
       ],
+      techStack: [
+        "AWS EC2",
+        "FastAPI",
+        "Python",
+        "llama.cpp",
+        "Linux",
+        "Bash",
+      ],
+      impact:
+        "Proved that practical AIOps workflows can run in a self-hosted free-tier cloud setup with no paid model dependency.",
+      githubUrl: "https://github.com/ketanayatti/Self-Hosted-AIOps-Agent-on-AWS",
     },
   ];
 
-  const devops_principles = [
-    "Automate everything - manual work is debt",
-    "Infrastructure as Code - version control for infrastructure",
-    "Continuous integration & deployment - fast feedback",
-    "Monitoring & observability - if you can't measure it, you can't improve it",
-    "Security by default - shift-left on security",
-  ];
-
-  const tools = [
-    { name: "Docker", category: "Containerization", icon: FaDocker },
-    { name: "Jenkins", category: "CI/CD", icon: SiJenkins },
-    { name: "AWS", category: "Cloud", icon: FaAws },
-    { name: "Linux/Bash", category: "Scripting", icon: FaLinux },
-    { name: "Prometheus", category: "Monitoring", icon: SiPrometheus },
-    { name: "Terraform", category: "Infrastructure as Code", icon: FaGithub },
+  const devopsTools = [
+    { name: "Jenkins", category: "CI/CD Automation" },
+    { name: "Docker", category: "Containerization" },
+    { name: "Docker Compose", category: "Orchestration" },
+    { name: "GitHub", category: "Version Control" },
+    { name: "Apache", category: "Reverse Proxy" },
+    { name: "MongoDB", category: "Database" },
+    { name: "Bash / Scripting", category: "Infrastructure as Code" },
+    { name: "Linux", category: "System Administration" },
   ];
 
   return (
     <>
       {/* Back Button */}
-      <section className="border-b border-[#1b2230]">
+      <section className="border-b border-slate-700/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
-          <Link href="/" className="text-[#00ff41] hover:text-[#00ff41]/80 transition text-xs font-mono">
-            ← back
+          <Link
+            href="/"
+            className="text-emerald-400 hover:text-emerald-300 transition text-xs font-mono"
+          >
+            ← back home
           </Link>
         </div>
       </section>
 
-      {/* Philosophy Section */}
-      <section className="border-b border-[#1b2230]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-          <h2 className="text-lg md:text-xl font-bold text-[#c9d1d9] mb-6">DevOps Philosophy</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-[#0d1117] border border-[#1b2230] rounded p-4">
-              <h3 className="text-[#00ff41] font-bold mb-3 text-sm">Core Principles</h3>
-              <ul className="space-y-2">
-                {devops_principles.map((principle, idx) => (
-                  <li key={idx} className="text-xs text-[#8b949e] flex gap-2">
-                    <span className="text-[#00ff41] flex-shrink-0">→</span>
-                    <span>{principle}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="bg-[#0d1117] border border-[#1b2230] rounded p-4">
-              <h3 className="text-[#00ff41] font-bold mb-3 text-sm">DevOps Mindset</h3>
-              <p className="text-xs text-[#8b949e] leading-relaxed">
-                Infrastructure as code, observability-first design, and continuous improvement. Every deployment should be reproducible, every alert should be actionable, and every incident should lead to learning.
+      {/* Header Section */}
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="border-b border-slate-700/50 px-4 sm:px-6 py-12"
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.div variants={itemVariants} className="space-y-4">
+            <div>
+              <h1 className="text-3xl md:text-4xl font-bold text-slate-100 mb-3">
+                DevOps Report Cards
+              </h1>
+              <p className="text-slate-400 max-w-2xl">
+                Small report cards with problem, solution, impact, tech, and measurable release reliability.
               </p>
             </div>
-          </div>
+            <div className="h-1 w-12 bg-emerald-400"></div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Tools & Technologies */}
-      <section className="border-b border-[#1b2230]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-          <h2 className="text-lg md:text-xl font-bold text-[#c9d1d9] mb-6">DevOps Toolkit</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {tools.map((tool, idx) => {
-              const Icon = tool.icon;
-              return (
-                <div key={idx} className="bg-[#0d1117] border border-[#1b2230] rounded p-4 hover:border-[#00ff41]/50 transition">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Icon className="text-[#00ff41]" size={16} />
-                    <div>
-                      <div className="font-bold text-[#c9d1d9] text-sm">{tool.name}</div>
-                      <div className="text-xs text-[#8b949e]">{tool.category}</div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      {/* Philosophy Section */}
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="border-b border-slate-700/50 px-4 sm:px-6 py-12"
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.div variants={itemVariants} className="space-y-8">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-3">
+                Core Philosophy
+              </h2>
+              <div className="h-1 w-12 bg-emerald-400"></div>
+            </div>
 
-      {/* Projects */}
-      <section className="border-b border-[#1b2230]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-          <h2 className="text-lg md:text-xl font-bold text-[#c9d1d9] mb-6">Infrastructure Projects</h2>
-          <div className="space-y-4">
-            {opsProjects.map((project, idx) => (
-              <div key={idx} className="bg-[#0d1117] border border-[#1b2230] rounded overflow-hidden hover:border-[#00ff41]/50 transition-all">
-                <div className="bg-[#161b22] px-4 py-3 border-b border-[#1b2230]">
-                  <h3 className="text-sm font-bold text-[#c9d1d9]">{project.title}</h3>
-                  <p className="text-xs text-[#8b949e]">{project.description}</p>
-                </div>
-                <div className="p-4">
-                  {/* Highlights */}
-                  <div className="mb-3">
-                    <h4 className="text-[#00ff41] font-bold mb-2 text-xs">Key Features</h4>
-                    <ul className="space-y-1">
-                      {project.highlights.map((highlight, i) => (
-                        <li key={i} className="text-xs text-[#8b949e] flex items-center gap-2">
-                          <span className="text-[#00ff41]">•</span>
-                          {highlight}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Tech Stack */}
-                  <div className="mb-3">
-                    <h4 className="text-[#00ff41] font-bold mb-2 text-xs">Technologies</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {project.techs.map((tech, i) => (
-                        <span key={i} className="bg-[#1b2230] text-[#00ff41] px-2 py-1 text-xs rounded border border-[#00ff41]/30">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* GitHub Link */}
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-[#00ff41] hover:text-[#00ff41]/80 transition text-xs"
-                  >
-                    <FaGithub size={14} />
-                    View Code
-                  </a>
-                </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6 space-y-4">
+                <h3 className="text-emerald-400 font-bold text-base">What I Believe</h3>
+                <ul className="space-y-3">
+                  {[
+                    "Automation eliminates technical debt",
+                    "Infrastructure as code always",
+                    "Reliability is architecture, not ops heroics",
+                    "Monitor everything from day one",
+                    "Failures should be automatic, not manual",
+                  ].map((point, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-start gap-3 text-sm text-slate-300"
+                    >
+                      <span className="text-emerald-400 flex-shrink-0 mt-1 font-bold">
+                        →
+                      </span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            ))}
-          </div>
+
+              <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6 space-y-4">
+                <h3 className="text-emerald-400 font-bold text-base">
+                  DevOps Mindset
+                </h3>
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  Every deployment should be reproducible. Every alert should be
+                  actionable. Every incident should lead to learning and
+                  automation.
+                  <br />
+                  <br />
+                  Infrastructure isn't separate from code—it's part of the
+                  product.
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
+
+      {/* Projects Section */}
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="border-b border-slate-700/50 px-4 sm:px-6 py-12"
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.div variants={itemVariants} className="space-y-10">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-3">
+                  Featured Ops Projects
+                </h2>
+                <p className="text-slate-400">
+                  Deployment and infrastructure execution across all major projects.
+                </p>
+                <p className="text-emerald-400/80 text-xs mt-2">Scroll horizontally to explore projects.</p>
+                <div className="h-1 w-12 bg-emerald-400 mt-4"></div>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <motion.button
+                  type="button"
+                  onClick={() => scrollProjects("left")}
+                  whileHover={{ scale: 1.05, x: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-9 h-9 rounded-full border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10 transition-colors flex items-center justify-center"
+                  aria-label="Scroll projects left"
+                >
+                  <FaChevronLeft size={12} />
+                </motion.button>
+                <motion.button
+                  type="button"
+                  onClick={() => scrollProjects("right")}
+                  whileHover={{ scale: 1.05, x: 2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-9 h-9 rounded-full border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10 transition-colors flex items-center justify-center"
+                  aria-label="Scroll projects right"
+                >
+                  <FaChevronRight size={12} />
+                </motion.button>
+              </div>
+            </div>
+
+            <div ref={projectRailRef} className="overflow-x-auto pb-4 scroll-smooth">
+              <div className="flex gap-6 min-w-max snap-x snap-mandatory">
+                {projects.map((project, idx) => (
+                  <motion.div
+                    key={idx}
+                    variants={itemVariants}
+                    viewport={{ once: true, amount: 0.2 }}
+                    className="snap-start shrink-0 w-[88vw] sm:w-[360px] md:w-[390px]"
+                  >
+                    <ProjectCard
+                      title={project.title}
+                      status={project.status}
+                      problemSolved={project.problemSolved}
+                      solutionDelivered={project.solutionDelivered}
+                      metrics={project.metrics}
+                      techStack={project.techStack}
+                      impact={project.impact}
+                      githubUrl={project.githubUrl}
+                      compact
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* DevOps Toolkit */}
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="border-b border-slate-700/50 px-4 sm:px-6 py-12"
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.div variants={itemVariants} className="space-y-6">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-3">
+                DevOps Toolkit
+              </h2>
+              <div className="h-1 w-12 bg-emerald-400"></div>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {devopsTools.map((tool, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={itemVariants}
+                  className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-4 hover:border-emerald-500/30 transition-colors duration-300"
+                >
+                  <p className="text-emerald-400 font-bold text-sm">
+                    {tool.name}
+                  </p>
+                  <p className="text-slate-400 text-xs mt-1">{tool.category}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </motion.section>
 
       {/* Interactive Terminal */}
-      <section className="border-b border-[#1b2230]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-          <h2 className="text-lg md:text-xl font-bold text-[#c9d1d9] mb-6">DevOps Terminal</h2>
-          <DevOpsTerminal />
-        </div>
-      </section>
-
-      {/* Security & Infrastructure Hardening */}
-      <section className="border-b border-[#1b2230]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-          <h2 className="text-lg md:text-xl font-bold text-[#c9d1d9] mb-6">Security & Infrastructure Hardening</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-[#0d1117] border border-[#1b2230] rounded p-4 space-y-3">
-              <h3 className="text-[#00ff41] font-bold text-sm">Infrastructure Security</h3>
-              <ul className="space-y-2 text-xs text-[#8b949e]">
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">•</span>
-                  <span><strong>Network Isolation:</strong> Containerized services with network policies</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">•</span>
-                  <span><strong>Reverse Proxy:</strong> Nginx-based traffic filtering & SSL termination</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">•</span>
-                  <span><strong>Data Encryption:</strong> AES-256-GCM for sensitive vault data at rest</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">•</span>
-                  <span><strong>TLS 1.2+:</strong> Encrypted communication across all services</span>
-                </li>
-              </ul>
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="border-b border-slate-700/50 px-4 sm:px-6 py-12"
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.div variants={itemVariants} className="space-y-6">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-3">
+                DevOps Terminal
+              </h2>
+              <p className="text-slate-400 text-sm">
+                Interactive commands: type{" "}
+                <span className="font-mono text-emerald-400">help</span> for
+                available commands
+              </p>
+              <div className="h-1 w-12 bg-emerald-400 mt-4"></div>
             </div>
-            <div className="bg-[#0d1117] border border-[#1b2230] rounded p-4 space-y-3">
-              <h3 className="text-[#00ff41] font-bold text-sm">CI/CD Security & Compliance</h3>
-              <ul className="space-y-2 text-xs text-[#8b949e]">
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">•</span>
-                  <span><strong>Secrets Management:</strong> Environment-based credential isolation</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">•</span>
-                  <span><strong>Automated Security Scanning:</strong> Dependency & vulnerability checks</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">•</span>
-                  <span><strong>Container Scanning:</strong> Image vulnerability detection before deployment</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">•</span>
-                  <span><strong>Audit Logging:</strong> Deployment & configuration change tracking</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+            <DevOpsTerminal />
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Contact Section */}
-      <section className="bg-[#0d1117] border-t border-[#1b2230]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 text-center">
-          <h2 className="text-lg md:text-xl font-bold text-[#c9d1d9] mb-3">Open to Full-Time Roles</h2>
-          <p className="text-xs text-[#8b949e] mb-4 max-w-lg mx-auto">
-            Looking for DevOps Engineer / SRE / Cloud Engineer opportunities. Bengaluru, Pune, Hyderabad — or remote. I respond within 24 hours.
-          </p>
-          <a
-            href="https://linkedin.com/in/ketanayatti"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-4 py-2 border border-[#00ff41] text-[#00ff41] rounded text-xs font-mono hover:bg-[#00ff41] hover:text-[#0f1419] transition-all duration-300 hover:scale-105"
+      {/* Contact CTA */}
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="px-4 sm:px-6 py-12"
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            variants={itemVariants}
+            className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-lg p-8 text-center"
           >
-            Get in Touch
-          </a>
+            <h2 className="text-2xl font-bold text-slate-100 mb-2">
+              Ready to build reliable systems together?
+            </h2>
+            <p className="text-slate-400 mb-6 max-w-2xl mx-auto">
+              I'm open to full-time Full-Stack / DevOps / Cloud roles.
+              Let's talk about infrastructure that scales.
+            </p>
+            <Link
+              href="/#connect"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 text-slate-950 font-semibold rounded-lg hover:bg-emerald-400 transition-colors duration-300"
+            >
+              Get in Touch
+            </Link>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
+    
+
     </>
   );
 }

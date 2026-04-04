@@ -21,7 +21,7 @@ const TERMINAL_COMMANDS: Record<
   },
   status: {
     output: [
-      "actively looking · DevOps / SRE / Cloud",
+      "actively looking · Full-Stack / DevOps / Cloud",
       "Bengaluru or Remote · respond within 24hrs",
     ],
     type: "success",
@@ -93,8 +93,8 @@ const TERMINAL_COMMANDS: Record<
     output: [
       "STATUS: Open to Work",
       "─────────────────────",
-      "Roles:     DevOps Engineer · SRE · Cloud Infrastructure Engineer",
-      "           Platform Engineer · Cloud Engineer",
+      "Roles:     Full-Stack Engineer · DevOps Engineer · Cloud Engineer",
+      "           Platform Engineer · Infrastructure Engineer",
       "Locations: Bengaluru · Pune · Hyderabad · Remote",
       "Type:      Full-time",
       "Start:     Immediately available",

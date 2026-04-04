@@ -1,268 +1,332 @@
-import Link from "next/link";
-import { FaGithub, FaNode, FaReact } from "react-icons/fa";
-import { SiTypescript, SiMongodb, SiPython, SiCplusplus } from "react-icons/si";
+"use client";
 
-export const metadata = {
-  title: "Ketan Ayatti | Development",
-  description: "Full-stack development skills, projects, and approach.",
+import { useRef } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import {
+  FaCode,
+  FaLayerGroup,
+  FaReact,
+  FaNode,
+  FaBolt,
+  FaShieldAlt,
+  FaArrowRight,
+  FaChevronLeft,
+  FaChevronRight,
+} from "react-icons/fa";
+import { SiTypescript, SiMongodb, SiSocketdotio, SiTailwindcss, SiZod } from "react-icons/si";
+import ProjectCard from "@/components/ProjectCard";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.05 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
 export default function DevPage() {
-  const devProjects = [
+  const projectRailRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollProjects = (direction: "left" | "right") => {
+    const offset = direction === "left" ? -420 : 420;
+    projectRailRef.current?.scrollBy({ left: offset, behavior: "smooth" });
+  };
+
+  const projects = [
     {
-      title: "Communiatec - Full-Stack Collaboration Platform",
-      description: "Real-time messaging, collaborative code editor, file vault, and AI suggestions.",
-      techs: ["React 18", "Node.js", "Socket.io", "MongoDB", "Google Gemini AI"],
-      deployed: "Jenkins CI/CD · Docker · NGINX · Linux EC2",
-      github: "https://github.com/ketanayatti/communiatec",
-      highlights: [
-        "Real-time messaging with typing indicators",
-        "Multi-user code editor with live sync",
-        "Secure file vault with role-based access",
-        "AI-powered suggestions",
-        "Admin dashboard with audit logs",
+      title: "Communiatec Dev Platform",
+      status: "shipped" as const,
+      problemSolved:
+        "Developers were losing focus by switching between chat, code, AI help, and file tools, while ad-hoc sharing created security risks.",
+      solutionDelivered:
+        "Built a unified collaboration platform with real-time messaging, Monaco code editing, GenAI assistance, and a secure audited vault.",
+      metrics: [
+        "~35% less context switching",
+        "< 1.2s AI response target",
+        "$500+ annual SaaS savings",
+        "Sub-50ms live sync target",
       ],
+      techStack: [
+        "React 18",
+        "Vite",
+        "Zustand",
+        "TailwindCSS",
+        "Monaco Editor",
+        "Node.js",
+        "Express",
+        "Socket.io",
+        "MongoDB",
+        "Redis",
+        "Docker Compose",
+        "PM2",
+        "Jenkins",
+      ],
+      impact:
+        "Consolidated collaboration, code editing, AI help, and secure file sharing into one production-style workflow with measurable efficiency gains.",
+      githubUrl: "https://github.com/ketanayatti/communiatec",
     },
     {
       title: "AI Mock Interview Platform",
-      description: "Adaptive interview questions, resume parsing, and performance analytics.",
-      techs: ["Node.js", "Express", "MongoDB", "Google Gemini", "PDF Parsing"],
-      deployed: "Branch-aware Jenkins · Docker Compose · Staging + Prod envs",
-      github: "https://github.com/ketanayatti/ai-mock-interview",
-      highlights: [
-        "Adaptive question generation based on experience",
-        "Resume parsing (PDF & DOCX)",
-        "Multi-model AI evaluation",
-        "Session persistence and analytics",
-        "Score trends and performance insights",
+      status: "shipped" as const,
+      problemSolved:
+        "Job seekers needed realistic, tailored interview practice without depending on human availability or generic question banks.",
+      solutionDelivered:
+        "Built a 24/7 AI interviewer that adapts to resume uploads, role context, and experience level with multi-round interview flows.",
+      metrics: [
+        "40% lower AI response latency",
+        "65% higher initial conversion",
+        "< 2s resume parsing",
+        "Adaptive multi-round interview flow",
       ],
+      techStack: [
+        "EJS",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "Google Gemini",
+        "OpenAI",
+        "Cohere",
+        "pdf-parse",
+      ],
+      impact:
+        "Transformed interview prep into a contextual product experience with measurable user improvement and lower interaction friction.",
+      githubUrl: "https://github.com/ketanayatti/ai-mock-interview",
     },
   ];
 
-  const skills = [
-    { name: "JavaScript/TypeScript", icon: SiTypescript },
-    { name: "React / Next.js", icon: FaReact },
-    { name: "Node.js / Express", icon: FaNode },
-    { name: "MongoDB / Mongoose", icon: SiMongodb },
-    { name: "Python", icon: SiPython },
-    { name: "C++", icon: SiCplusplus },
-    { name: "RESTful APIs", icon: FaNode },
-    { name: "Real-time (Socket.io)", icon: FaNode },
+  const devToolbox = [
+    { name: "TypeScript", icon: SiTypescript, tag: "Type Safety" },
+    { name: "React", icon: FaReact, tag: "UI Systems" },
+    { name: "Node.js", icon: FaNode, tag: "Backend APIs" },
+    { name: "MongoDB", icon: SiMongodb, tag: "Data Layer" },
+    { name: "Socket.io", icon: SiSocketdotio, tag: "Realtime" },
+    { name: "TailwindCSS", icon: SiTailwindcss, tag: "Design System" },
+    { name: "Zod", icon: SiZod, tag: "Validation" },
+    { name: "REST Architecture", icon: FaLayerGroup, tag: "Service Contracts" },
   ];
 
   return (
     <>
-      {/* Back Button */}
-      <section className="border-b border-[#1b2230]">
+      <section className="border-b border-slate-700/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
-          <Link href="/" className="text-[#00ff41] hover:text-[#00ff41]/80 transition text-xs font-mono">
-            ← back
+          <Link href="/" className="text-emerald-400 hover:text-emerald-300 transition text-xs font-mono">
+            ← back home
           </Link>
         </div>
       </section>
 
-      {/* Development Philosophy */}
-      <section className="border-b border-[#1b2230]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-          <h2 className="text-lg md:text-xl font-bold text-[#c9d1d9] mb-2">Full-Stack Developer</h2>
-          <p className="text-[#8b949e] text-sm mb-6">Full-stack foundations that inform how I think about infrastructure. Every system I deploy, I've also built.</p>
-          
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-[#0d1117] border border-[#1b2230] rounded p-4 space-y-3">
-              <h3 className="text-[#00ff41] font-bold text-sm">Core Principles</h3>
-              <ul className="space-y-2 text-xs text-[#8b949e]">
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">✓</span>
-                  <span>Write code for humans to read, not just machines</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">✓</span>
-                  <span>Understand the problem before writing solutions</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">✓</span>
-                  <span>Embrace simplicity over clever hacks</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">✓</span>
-                  <span>Continuous learning and improvement</span>
-                </li>
-              </ul>
-            </div>
-            <div className="bg-[#0d1117] border border-[#1b2230] rounded p-4 space-y-3">
-              <h3 className="text-[#00ff41] font-bold text-sm">Problem-Solving Approach</h3>
-              <ol className="space-y-2 text-xs text-[#8b949e]">
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">①</span>
-                  <span>Understand requirements thoroughly</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">②</span>
-                  <span>Break down into smaller tasks</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">③</span>
-                  <span>Design before implementation</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">④</span>
-                  <span>Test continuously & refactor</span>
-                </li>
-              </ol>
-            </div>
-          </div>
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="border-b border-slate-700/50 px-4 sm:px-6 py-12"
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.div variants={itemVariants} className="space-y-5">
+            <p className="text-sm uppercase tracking-[0.2em] text-emerald-400/80">Ketan Ayatti</p>
+            <h1 className="text-3xl md:text-5xl font-bold text-slate-100 leading-tight">
+              Dev Projects
+              <br />
+              <span className="text-emerald-400">for real product delivery</span>
+            </h1>
+            <p className="text-slate-400 max-w-3xl">
+              I design and build product features with the same mindset used in DevOps: clear contracts,
+              automation-first workflows, and measurable reliability in production.
+            </p>
+            <div className="h-1 w-12 bg-emerald-400"></div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Skills Section */}
-      <section className="border-b border-[#1b2230]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-          <h2 className="text-lg md:text-xl font-bold text-[#c9d1d9] mb-6">Technical Skills</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {skills.map((skill, idx) => {
-              const Icon = skill.icon;
-              return (
-                <div key={idx} className="bg-[#0d1117] border border-[#1b2230] rounded p-3">
-                  <div className="flex items-center gap-2">
-                    <Icon className="text-[#00ff41]" size={16} />
-                    <span className="font-bold text-[#c9d1d9] text-sm">{skill.name}</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="border-b border-slate-700/50 px-4 sm:px-6 py-12"
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.div variants={itemVariants} className="space-y-8">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-3">How I Build</h2>
+              <div className="h-1 w-12 bg-emerald-400"></div>
+            </div>
 
-      {/* Projects Section */}
-      <section className="border-b border-[#1b2230]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-          <h2 className="text-lg md:text-xl font-bold text-[#c9d1d9] mb-6">Featured Projects</h2>
-          <div className="space-y-6">
-            {devProjects.map((project, idx) => (
-              <div key={idx} className="bg-[#0d1117] border border-[#1b2230] rounded overflow-hidden hover:border-[#00ff41]/50 transition-all">
-                <div className="bg-[#161b22] px-4 py-3 border-b border-[#1b2230]">
-                  <h3 className="text-base md:text-lg font-bold text-[#c9d1d9] mb-1">{project.title}</h3>
-                  <p className="text-xs md:text-sm text-[#8b949e]">{project.description}</p>
-                </div>
-                <div className="p-4">
-                  {/* Highlights */}
-                  <div className="mb-4">
-                    <h4 className="text-[#00ff41] font-bold mb-2 text-xs">Key Features</h4>
-                    <ul className="space-y-1">
-                      {project.highlights.map((highlight, i) => (
-                        <li key={i} className="text-xs text-[#8b949e] flex items-center gap-2">
-                          <span className="text-[#00ff41]">•</span>
-                          {highlight}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6 space-y-4">
+                <h3 className="text-emerald-400 font-bold text-base">Engineering Principles</h3>
+                <ul className="space-y-3">
+                  {[
+                    "Build for maintainability before feature velocity",
+                    "Treat validation and edge-cases as first-class",
+                    "Design APIs and UI state transitions explicitly",
+                    "Ship in small, observable increments",
+                  ].map((point, idx) => (
+                    <li key={idx} className="flex items-start gap-3 text-sm text-slate-300">
+                      <span className="text-emerald-400 flex-shrink-0 mt-1">→</span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-                  {/* Tech Stack */}
-                  <div className="mb-4">
-                    <h4 className="text-[#00ff41] font-bold mb-2 text-xs">Tech Stack</h4>
-                    <div className="flex flex-wrap gap-1">
-                      {project.techs.map((tech, i) => (
-                        <span key={i} className="bg-[#1b2230] text-[#00ff41] px-2 py-0.5 text-xs rounded border border-[#00ff41]/30">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Deployment Info */}
-                  <div className="mb-4">
-                    <p className="text-[#8b949e] text-xs">
-                      <span className="text-[#00ff41] font-bold">Deployed via:</span> {project.deployed}
-                    </p>
-                  </div>
-
-                  {/* GitHub Link */}
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-[#00ff41] hover:text-[#00ff41]/80 transition text-xs"
-                  >
-                    <FaGithub size={14} />
-                    View on GitHub
-                  </a>
+              <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6 space-y-4">
+                <h3 className="text-emerald-400 font-bold text-base">Delivery Standard</h3>
+                <div className="space-y-3 text-sm text-slate-300">
+                  <p className="flex items-start gap-3">
+                    <FaCode className="text-emerald-400 mt-0.5" />
+                    <span>Readable architecture over brittle shortcuts.</span>
+                  </p>
+                  <p className="flex items-start gap-3">
+                    <FaBolt className="text-emerald-400 mt-0.5" />
+                    <span>Fast feedback loops with tight validation and review gates.</span>
+                  </p>
+                  <p className="flex items-start gap-3">
+                    <FaShieldAlt className="text-emerald-400 mt-0.5" />
+                    <span>Production readiness considered from the first commit.</span>
+                  </p>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Security & Networking Section */}
-      <section className="border-b border-[#1b2230]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-          <h2 className="text-lg md:text-xl font-bold text-[#c9d1d9] mb-6">Security & Networking</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-[#0d1117] border border-[#1b2230] rounded p-4 space-y-3">
-              <h3 className="text-[#00ff41] font-bold text-sm">Application Security</h3>
-              <ul className="space-y-2 text-xs text-[#8b949e]">
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">•</span>
-                  <span><strong>JWT Authentication:</strong> Stateless token-based auth for API requests</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">•</span>
-                  <span><strong>Password Hashing:</strong> bcrypt with unique salts for user credentials</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">•</span>
-                  <span><strong>Input Validation:</strong> NoSQL Injection & XSS prevention middleware</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">•</span>
-                  <span><strong>HTTP-Only Cookies:</strong> Secure token storage with SameSite protection</span>
-                </li>
-              </ul>
             </div>
-            <div className="bg-[#0d1117] border border-[#1b2230] rounded p-4 space-y-3">
-              <h3 className="text-[#00ff41] font-bold text-sm">Network & API Security</h3>
-              <ul className="space-y-2 text-xs text-[#8b949e]">
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">•</span>
-                  <span><strong>TLS 1.2+:</strong> HTTPS for all data in transit</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">•</span>
-                  <span><strong>Rate Limiting:</strong> DDoS & brute-force attack mitigation</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">•</span>
-                  <span><strong>Security Headers:</strong> CSP, X-Frame-Options via Helmet.js</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00ff41] flex-shrink-0 mt-0.5">•</span>
-                  <span><strong>RBAC:</strong> Fine-grained access control by user roles</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Contact Section */}
-      <section className="bg-[#0d1117] border-t border-[#1b2230]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 text-center">
-          <h2 className="text-lg md:text-xl font-bold text-[#c9d1d9] mb-3">Let's Connect</h2>
-          <p className="text-xs text-[#8b949e] mb-4 max-w-lg mx-auto">
-            Interested in chatting about development, architecture, or collaboration? I'm actively looking for full-time DevOps / SRE / Cloud roles.
-          </p>
-          <a
-            href="https://linkedin.com/in/ketanayatti"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-4 py-2 border border-[#00ff41] text-[#00ff41] rounded text-xs font-mono hover:bg-[#00ff41] hover:text-[#0f1419] transition-all duration-300 hover:scale-105"
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="border-b border-slate-700/50 px-4 sm:px-6 py-12"
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.div variants={itemVariants} className="space-y-8">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-3">Development Toolbox</h2>
+              <p className="text-slate-400">Tools and frameworks I use to deliver clean, scalable product features.</p>
+              <div className="h-1 w-12 bg-emerald-400 mt-4"></div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {devToolbox.map((tool, idx) => {
+                const Icon = tool.icon;
+                return (
+                  <div
+                    key={idx}
+                    className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-md border border-slate-700/50 rounded-lg p-4 hover:border-emerald-500/40 transition-colors duration-300"
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <Icon className="text-emerald-400" size={16} />
+                      <p className="text-slate-100 font-semibold text-sm">{tool.name}</p>
+                    </div>
+                    <p className="text-slate-400 text-xs">{tool.tag}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="border-b border-slate-700/50 px-4 sm:px-6 py-12"
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.div variants={itemVariants} className="space-y-10">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-3">Development Report Cards</h2>
+                <p className="text-slate-400">Small report cards with problem, solution, impact, tech, and measurable outcomes.</p>
+                <p className="text-emerald-400/80 text-xs mt-2">Scroll horizontally to explore projects.</p>
+                <div className="h-1 w-12 bg-emerald-400 mt-4"></div>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <motion.button
+                  type="button"
+                  onClick={() => scrollProjects("left")}
+                  whileHover={{ scale: 1.05, x: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-9 h-9 rounded-full border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10 transition-colors flex items-center justify-center"
+                  aria-label="Scroll projects left"
+                >
+                  <FaChevronLeft size={12} />
+                </motion.button>
+                <motion.button
+                  type="button"
+                  onClick={() => scrollProjects("right")}
+                  whileHover={{ scale: 1.05, x: 2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-9 h-9 rounded-full border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10 transition-colors flex items-center justify-center"
+                  aria-label="Scroll projects right"
+                >
+                  <FaChevronRight size={12} />
+                </motion.button>
+              </div>
+            </div>
+
+            <div ref={projectRailRef} className="overflow-x-auto pb-4 scroll-smooth">
+              <div className="flex gap-6 min-w-max snap-x snap-mandatory">
+                {projects.map((project, idx) => (
+                  <motion.div
+                    key={idx}
+                    variants={itemVariants}
+                    className="snap-start shrink-0 w-[88vw] sm:w-[360px] md:w-[390px]"
+                  >
+                    <ProjectCard
+                      title={project.title}
+                      status={project.status}
+                      problemSolved={project.problemSolved}
+                      solutionDelivered={project.solutionDelivered}
+                      metrics={project.metrics}
+                      techStack={project.techStack}
+                      impact={project.impact}
+                      githubUrl={project.githubUrl}
+                      compact
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="px-4 sm:px-6 py-16"
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            variants={itemVariants}
+            className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-lg p-8 text-center"
           >
-            Get in Touch
-          </a>
+            <h2 className="text-2xl font-bold text-slate-100 mb-2">Need dev work that behaves like production software?</h2>
+            <p className="text-slate-400 mb-6 max-w-2xl mx-auto">
+              I build product systems that are fast, maintainable, and aligned with backend and DevOps realities from day one.
+            </p>
+            <Link
+              href="/#connect"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 text-slate-950 font-semibold rounded-lg hover:bg-emerald-400 transition-colors duration-300"
+            >
+              Let&apos;s Build
+              <FaArrowRight size={14} />
+            </Link>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </>
   );
 }
