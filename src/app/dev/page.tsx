@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -11,8 +10,6 @@ import {
   FaBolt,
   FaShieldAlt,
   FaArrowRight,
-  FaChevronLeft,
-  FaChevronRight,
 } from "react-icons/fa";
 import { SiTypescript, SiMongodb, SiSocketdotio, SiTailwindcss, SiZod } from "react-icons/si";
 import ProjectCard from "@/components/ProjectCard";
@@ -31,13 +28,6 @@ const itemVariants = {
 };
 
 export default function DevPage() {
-  const projectRailRef = useRef<HTMLDivElement | null>(null);
-
-  const scrollProjects = (direction: "left" | "right") => {
-    const offset = direction === "left" ? -420 : 420;
-    projectRailRef.current?.scrollBy({ left: offset, behavior: "smooth" });
-  };
-
   const projects = [
     {
       title: "Communiatec Dev Platform",
@@ -105,183 +95,151 @@ export default function DevPage() {
     { name: "React", icon: FaReact, tag: "UI Systems" },
     { name: "Node.js", icon: FaNode, tag: "Backend APIs" },
     { name: "MongoDB", icon: SiMongodb, tag: "Data Layer" },
+    { name: "Zod", icon: SiZod, tag: "Validation" },
     { name: "Socket.io", icon: SiSocketdotio, tag: "Realtime" },
     { name: "TailwindCSS", icon: SiTailwindcss, tag: "Design System" },
-    { name: "Zod", icon: SiZod, tag: "Validation" },
     { name: "REST Architecture", icon: FaLayerGroup, tag: "Service Contracts" },
   ];
 
+  const buildPillars = [
+    {
+      title: "Product-First Development",
+      description:
+        "Build features around user workflows, not isolated screens, so every release improves real product outcomes.",
+      icon: FaCode,
+    },
+    {
+      title: "Structured Engineering",
+      description:
+        "Design explicit state, validation, and service boundaries to keep systems maintainable as complexity grows.",
+      icon: FaLayerGroup,
+    },
+    {
+      title: "Delivery Discipline",
+      description:
+        "Keep code delivery-ready from day one using review gates, measurable quality checks, and reliable release habits.",
+      icon: FaShieldAlt,
+    },
+  ];
+
+  const quickFacts = [
+    "TypeScript",
+    "React",
+    "Node.js",
+    "Open to Work",
+  ];
+
   return (
-    <>
-      <section className="border-b border-slate-700/50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
-          <Link href="/" className="text-emerald-400 hover:text-emerald-300 transition text-xs font-mono">
-            ← back home
-          </Link>
-        </div>
-      </section>
+    <motion.main
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="relative min-h-screen overflow-hidden bg-slate-950"
+    >
+      <div className="intro-grid pointer-events-none absolute inset-0 opacity-50" />
+      <div className="intro-orb intro-orb-one pointer-events-none" />
+      <div className="intro-orb intro-orb-two pointer-events-none" />
+      <div className="intro-orb intro-orb-three pointer-events-none" />
 
-      <motion.section
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="border-b border-slate-700/50 px-4 sm:px-6 py-12"
-      >
-        <div className="max-w-6xl mx-auto">
-          <motion.div variants={itemVariants} className="space-y-5">
-            <p className="text-sm uppercase tracking-[0.2em] text-emerald-400/80">Ketan Ayatti</p>
-            <h1 className="text-3xl md:text-5xl font-bold text-slate-100 leading-tight">
-              Dev Projects
-              <br />
-              <span className="text-emerald-400">for real product delivery</span>
-            </h1>
-            <p className="text-slate-400 max-w-3xl">
-              I design and build product features with the same mindset used in DevOps: clear contracts,
-              automation-first workflows, and measurable reliability in production.
-            </p>
-            <div className="h-1 w-12 bg-emerald-400"></div>
-          </motion.div>
-        </div>
-      </motion.section>
+      <div className="relative z-10">
+        <section className="border-b border-slate-700/50">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
+            <Link href="/" className="text-emerald-400 hover:text-emerald-300 transition text-xs font-mono">
+              ← back home
+            </Link>
+          </div>
+        </section>
 
-      <motion.section
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        className="border-b border-slate-700/50 px-4 sm:px-6 py-12"
-      >
-        <div className="max-w-6xl mx-auto">
-          <motion.div variants={itemVariants} className="space-y-8">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-3">How I Build</h2>
-              <div className="h-1 w-12 bg-emerald-400"></div>
-            </div>
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="border-b border-slate-700/50 px-4 sm:px-6 py-14"
+        >
+          <div className="max-w-6xl mx-auto">
+            <motion.div variants={itemVariants} className="space-y-7">
+              <p className="text-sm uppercase tracking-[0.2em] text-emerald-400/80">Development Portfolio</p>
+              <p className="text-slate-300 max-w-3xl text-base leading-relaxed">
+                I build product features with clear structure, validation, and implementation discipline.
+              </p>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6 space-y-4">
-                <h3 className="text-emerald-400 font-bold text-base">Engineering Principles</h3>
-                <ul className="space-y-3">
-                  {[
-                    "Build for maintainability before feature velocity",
-                    "Treat validation and edge-cases as first-class",
-                    "Design APIs and UI state transitions explicitly",
-                    "Ship in small, observable increments",
-                  ].map((point, idx) => (
-                    <li key={idx} className="flex items-start gap-3 text-sm text-slate-300">
-                      <span className="text-emerald-400 flex-shrink-0 mt-1">→</span>
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6 space-y-4">
-                <h3 className="text-emerald-400 font-bold text-base">Delivery Standard</h3>
-                <div className="space-y-3 text-sm text-slate-300">
-                  <p className="flex items-start gap-3">
-                    <FaCode className="text-emerald-400 mt-0.5" />
-                    <span>Readable architecture over brittle shortcuts.</span>
-                  </p>
-                  <p className="flex items-start gap-3">
-                    <FaBolt className="text-emerald-400 mt-0.5" />
-                    <span>Fast feedback loops with tight validation and review gates.</span>
-                  </p>
-                  <p className="flex items-start gap-3">
-                    <FaShieldAlt className="text-emerald-400 mt-0.5" />
-                    <span>Production readiness considered from the first commit.</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </motion.section>
-
-      <motion.section
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        className="border-b border-slate-700/50 px-4 sm:px-6 py-12"
-      >
-        <div className="max-w-6xl mx-auto">
-          <motion.div variants={itemVariants} className="space-y-8">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-3">Development Toolbox</h2>
-              <p className="text-slate-400">Tools and frameworks I use to deliver clean, scalable product features.</p>
-              <div className="h-1 w-12 bg-emerald-400 mt-4"></div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {devToolbox.map((tool, idx) => {
-                const Icon = tool.icon;
-                return (
-                  <div
-                    key={idx}
-                    className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-md border border-slate-700/50 rounded-lg p-4 hover:border-emerald-500/40 transition-colors duration-300"
+              <div className="flex flex-wrap gap-2 pt-1">
+                {quickFacts.map((fact) => (
+                  <span
+                    key={fact}
+                    className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-emerald-200"
                   >
-                    <div className="flex items-center gap-2 mb-2">
-                      <Icon className="text-emerald-400" size={16} />
-                      <p className="text-slate-100 font-semibold text-sm">{tool.name}</p>
-                    </div>
-                    <p className="text-slate-400 text-xs">{tool.tag}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </motion.div>
-        </div>
-      </motion.section>
+                    {fact}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </motion.section>
 
-      <motion.section
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        className="border-b border-slate-700/50 px-4 sm:px-6 py-12"
-      >
-        <div className="max-w-6xl mx-auto">
-          <motion.div variants={itemVariants} className="space-y-10">
-            <div className="flex items-start justify-between gap-4">
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="border-b border-slate-700/50 px-4 sm:px-6 py-14"
+        >
+          <div className="max-w-6xl mx-auto">
+            <motion.div variants={itemVariants} className="space-y-8">
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-3">Development Report Cards</h2>
-                <p className="text-slate-400">Small report cards with problem, solution, impact, tech, and measurable outcomes.</p>
-                <p className="text-emerald-400/80 text-xs mt-2">Scroll horizontally to explore projects.</p>
+                <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-3">How I Engineer</h2>
+                <p className="text-slate-400 max-w-2xl">A practical approach focused on maintainability, API structure, and implementation quality.</p>
                 <div className="h-1 w-12 bg-emerald-400 mt-4"></div>
               </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <motion.button
-                  type="button"
-                  onClick={() => scrollProjects("left")}
-                  whileHover={{ scale: 1.05, x: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-9 h-9 rounded-full border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10 transition-colors flex items-center justify-center"
-                  aria-label="Scroll projects left"
-                >
-                  <FaChevronLeft size={12} />
-                </motion.button>
-                <motion.button
-                  type="button"
-                  onClick={() => scrollProjects("right")}
-                  whileHover={{ scale: 1.05, x: 2 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-9 h-9 rounded-full border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10 transition-colors flex items-center justify-center"
-                  aria-label="Scroll projects right"
-                >
-                  <FaChevronRight size={12} />
-                </motion.button>
-              </div>
-            </div>
 
-            <div ref={projectRailRef} className="overflow-x-auto pb-4 scroll-smooth">
-              <div className="flex gap-6 min-w-max snap-x snap-mandatory">
-                {projects.map((project, idx) => (
-                  <motion.div
-                    key={idx}
-                    variants={itemVariants}
-                    className="snap-start shrink-0 w-[88vw] sm:w-[360px] md:w-[390px]"
-                  >
+              <div className="grid md:grid-cols-3 gap-5">
+                {buildPillars.map((pillar) => {
+                  const Icon = pillar.icon;
+                  return (
+                    <div
+                      key={pillar.title}
+                      className="bg-linear-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-xl p-6 hover:border-emerald-500/40 hover:-translate-y-1 transition-all duration-300"
+                    >
+                      <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/15 border border-emerald-500/30 mb-4">
+                        <Icon className="text-emerald-300" />
+                      </div>
+                      <h3 className="text-slate-100 font-bold text-base mb-2">{pillar.title}</h3>
+                      <p className="text-slate-400 text-sm leading-relaxed">{pillar.description}</p>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="bg-slate-900/60 border border-slate-700/50 rounded-xl p-5">
+                <p className="text-sm text-slate-300 flex items-start gap-3">
+                  <FaBolt className="text-emerald-400 mt-0.5" />
+                  <span>
+                    Working standard: readable architecture, review gates, measurable quality, and release awareness from the first commit.
+                  </span>
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </motion.section>
+
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="border-b border-slate-700/50 px-4 sm:px-6 py-14"
+        >
+          <div className="max-w-6xl mx-auto">
+            <motion.div variants={itemVariants} className="space-y-8">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-3">Selected Development Projects</h2>
+                <p className="text-slate-400">Problem-led builds with implementation notes and measured outcomes.</p>
+                <div className="h-1 w-12 bg-emerald-400 mt-4"></div>
+              </div>
+
+              <div className="grid lg:grid-cols-2 gap-6 items-stretch">
+                {projects.map((project) => (
+                  <motion.div key={project.title} variants={itemVariants} className="h-full">
                     <ProjectCard
                       title={project.title}
                       status={project.status}
@@ -296,37 +254,74 @@ export default function DevPage() {
                   </motion.div>
                 ))}
               </div>
-            </div>
-          </motion.div>
-        </div>
-      </motion.section>
+            </motion.div>
+          </div>
+        </motion.section>
 
-      <motion.section
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        className="px-4 sm:px-6 py-16"
-      >
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            variants={itemVariants}
-            className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-lg p-8 text-center"
-          >
-            <h2 className="text-2xl font-bold text-slate-100 mb-2">Need dev work that behaves like production software?</h2>
-            <p className="text-slate-400 mb-6 max-w-2xl mx-auto">
-              I build product systems that are fast, maintainable, and aligned with backend and DevOps realities from day one.
-            </p>
-            <Link
-              href="/#connect"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 text-slate-950 font-semibold rounded-lg hover:bg-emerald-400 transition-colors duration-300"
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="border-b border-slate-700/50 px-4 sm:px-6 py-14"
+        >
+          <div className="max-w-6xl mx-auto">
+            <motion.div variants={itemVariants} className="space-y-8">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-3">Toolbox</h2>
+                <p className="text-slate-400">Core technologies used across backend, API, and systems work.</p>
+                <div className="h-1 w-12 bg-emerald-400 mt-4"></div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {devToolbox.map((tool) => {
+                  const Icon = tool.icon;
+                  return (
+                    <div
+                      key={tool.name}
+                      className="bg-linear-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-md border border-slate-700/50 rounded-lg p-4 hover:border-emerald-500/40 transition-colors duration-300"
+                    >
+                      <div className="flex items-center gap-2 mb-2">
+                        <Icon className="text-emerald-400" size={16} />
+                        <p className="text-slate-100 font-semibold text-sm">{tool.name}</p>
+                      </div>
+                      <p className="text-slate-400 text-xs">{tool.tag}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </div>
+        </motion.section>
+
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="px-4 sm:px-6 py-16"
+        >
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              variants={itemVariants}
+              className="bg-linear-to-r from-emerald-500/15 via-cyan-500/10 to-emerald-500/10 border border-emerald-500/30 rounded-xl p-8 md:p-10 text-center"
             >
-              Let&apos;s Build
-              <FaArrowRight size={14} />
-            </Link>
-          </motion.div>
-        </div>
-      </motion.section>
-    </>
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-3">Project Overview</h2>
+              <p className="text-slate-300 mb-7 max-w-2xl mx-auto">
+                These projects show the stack, implementation approach, and outcomes in a straightforward format.
+              </p>
+              <Link
+                href="/#connect"
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-emerald-500 text-slate-950 font-bold rounded-lg hover:bg-emerald-400 transition-colors duration-300"
+              >
+                View Contact
+                <FaArrowRight size={14} />
+              </Link>
+            </motion.div>
+          </div>
+        </motion.section>
+
+      </div>
+    </motion.main>
   );
 }

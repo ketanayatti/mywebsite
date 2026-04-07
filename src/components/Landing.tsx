@@ -2,9 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaEnvelope, FaArrowRight, FaCode, FaServer, FaCheckCircle, FaTasks, FaCodeBranch, FaCube } from "react-icons/fa";
-import MetricsSnapshot from "./MetricsSnapshot";
-import InternshipTimeline from "./InternshipTimeline";
+import { FaGithub, FaLinkedin, FaEnvelope, FaCode, FaServer } from "react-icons/fa";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -20,6 +18,31 @@ const itemVariants = {
   },
 };
 
+const signalStrip = [
+  "Open to Full-Time Roles",
+  "Open to Work",
+  "Automation-First Engineering",
+  "Production Mindset",
+];
+
+const capabilityCards = [
+  {
+    title: "Platform Delivery",
+    description:
+      "Design and ship end-to-end systems with reliable release flows, observability, and clean developer experience.",
+  },
+  {
+    title: "Backend + APIs",
+    description:
+      "Build dependable APIs, validation-heavy workflows, and maintainable service boundaries for product teams.",
+  },
+  {
+    title: "DevOps Automation",
+    description:
+      "Automate build, test, and deployment pipelines to remove repetitive manual steps and improve release confidence.",
+  },
+];
+
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-slate-950 flex flex-col">
@@ -28,8 +51,12 @@ export default function LandingPage() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="flex-1 w-full flex flex-col justify-center px-4 sm:px-6 py-16 sm:py-24"
+        className="relative isolate flex-1 w-full flex flex-col justify-center overflow-hidden px-4 sm:px-6 py-16 sm:py-24"
       >
+        <div className="pointer-events-none absolute -top-24 -left-20 h-72 w-72 rounded-full bg-emerald-500/15 blur-3xl" />
+        <div className="pointer-events-none absolute top-28 -right-20 h-72 w-72 rounded-full bg-cyan-500/15 blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.08),transparent_55%)]" />
+
         <div className="max-w-6xl mx-auto w-full">
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
             {/* Left Column */}
@@ -38,56 +65,61 @@ export default function LandingPage() {
               <div className="space-y-6">
                 <div>
                   <p className="text-sm uppercase tracking-[0.35em] text-emerald-400/80 mb-4">
-                    DevOps Engineer
+                    Full-Stack and DevOps Expertise
                   </p>
                   <h1 className="text-6xl sm:text-7xl md:text-8xl font-black text-slate-100 leading-tight tracking-tight">
                     Ketan Ayatti
                   </h1>
-                  <p className="text-lg sm:text-xl text-slate-300 font-semibold mt-3">
-                    Reliable systems, production delivery, and full-stack execution.
+                  <p className="text-lg sm:text-xl text-slate-300 font-semibold mt-3 max-w-xl">
+                    Building products with full-stack development and DevOps expertise.
                   </p>
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
-                    <p className="text-base sm:text-lg text-emerald-400 font-semibold">DevOps Engineer</p>
+                    <p className="text-base sm:text-lg text-emerald-400 font-semibold">Full-Stack and DevOps Expertise</p>
                     <span className="flex items-center gap-1 bg-emerald-500/20 border border-emerald-500/50 px-2 py-0.5 rounded text-xs">
                       <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                      <span className="text-emerald-300">Open to Work: Full-Stack / DevOps / Cloud</span>
+                      <span className="text-emerald-300">Full-Stack and DevOps Expertise</span>
                     </span>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-400">IonIdea · Jan 2026 – Apr 2026 (13 weeks intensive)</p>
+                  <p className="text-xs sm:text-sm text-slate-400">IonIdea · 2026 Experience</p>
                   <div className="w-16 h-1 bg-emerald-400"></div>
                 </div>
               </div>
 
               {/* Bio */}
               <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-md">
-                At IonIdea, I proved it: zero-downtime deployments via automated CI/CD, production modules with full CRUD + validation, and infrastructure that fails gracefully. 
+                I design and build core product modules across frontend, backend, and deployment workflows.
                 <br />
-                <span className="text-emerald-400 font-semibold">That&apos;s the kind of problem I enjoy solving.</span>
+                <span className="text-emerald-400 font-semibold">Focused on strong delivery quality under senior guidance and engineering best practices.</span>
               </p>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 pt-4">
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <p className="w-full text-xs uppercase tracking-[0.16em] text-emerald-300/70 sm:mb-1">Explore My Work</p>
                 <div className="group">
                   <Link
                     href="/dev"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-emerald-500 text-slate-950 font-semibold text-sm hover:bg-emerald-400 hover:scale-105 transition-all duration-300 rounded-lg shadow-lg shadow-emerald-500/30"
+                    className="inline-flex min-w-70 items-center justify-between gap-3 px-5 py-3.5 bg-linear-to-r from-emerald-500 via-teal-400 to-cyan-300 text-slate-950 font-bold text-sm rounded-xl shadow-[0_10px_30px_rgba(16,185,129,0.35)] hover:shadow-[0_14px_34px_rgba(16,185,129,0.45)] hover:-translate-y-0.5 transition-all duration-300"
                   >
-                    Dev Work
-                    <FaCode size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
+                    <span className="text-left">Click Here to See Development Work</span>
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-950/15">
+                      <FaCode size={14} className="group-hover:translate-x-0.5 transition-transform duration-300" />
+                    </span>
                   </Link>
-                  <p className="text-xs text-emerald-400/60 italic mt-2 text-center group-hover:text-emerald-400/100 transition-colors duration-300">Development foundations</p>
+                  <p className="text-xs text-emerald-400/60 italic mt-2 text-center group-hover:text-emerald-400 transition-colors duration-300">Core modules and product delivery</p>
                 </div>
                 <div className="group">
                   <Link
                     href="/ops"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-emerald-400 text-emerald-400 font-semibold text-sm hover:bg-emerald-400/10 hover:scale-105 transition-all duration-300 rounded-lg"
+                    className="inline-flex min-w-70 items-center justify-between gap-3 px-5 py-3.5 border border-emerald-300/70 bg-emerald-400/5 text-emerald-200 font-bold text-sm rounded-xl shadow-[0_10px_24px_rgba(16,185,129,0.16)] hover:bg-emerald-400/15 hover:-translate-y-0.5 hover:border-emerald-300 transition-all duration-300"
                   >
-                    DevOps & Infra
-                    <FaServer size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
+                    <span className="text-left">Click Here to See Deployment Work</span>
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-emerald-300/40 bg-emerald-400/10">
+                      <FaServer size={14} className="group-hover:translate-x-0.5 transition-transform duration-300" />
+                    </span>
                   </Link>
-                  <p className="text-xs text-emerald-400/60 italic mt-2 text-center group-hover:text-emerald-400/100 transition-colors duration-300">Production systems</p>
+                  <p className="text-xs text-emerald-400/60 italic mt-2 text-center group-hover:text-emerald-400 transition-colors duration-300">Pipelines, environments, and release flow</p>
                 </div>
               </div>
             </motion.div>
@@ -95,28 +127,31 @@ export default function LandingPage() {
             {/* Right Column - Featured Info */}
             <motion.div variants={itemVariants} className="space-y-6">
               {/* Info Card 1 */}
-              <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6 space-y-4 hover:border-emerald-500/30 transition-colors duration-300">
+              <div className="bg-linear-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6 space-y-4 hover:border-emerald-500/30 transition-colors duration-300">
                 <h3 className="text-emerald-400 font-bold text-sm">Internship</h3>
                 <div className="space-y-3">
-                  <p className="text-slate-100 font-semibold text-sm">IonIdea · 13 Weeks</p>
-                  <p className="text-slate-400 text-xs leading-relaxed">
-                    Three independent projects delivering end-to-end impact: a production module with full lifecycle CRUD, a production-ready DevOps pipeline with zero manual steps, and a full-stack application system.
-                  </p>
+                  <p className="text-slate-100 font-semibold text-sm">IonIdea · Product + Delivery Internship</p>
+                  <ul className="space-y-2 text-xs text-slate-400 leading-relaxed">
+                    <li className="flex items-start gap-2"><span className="text-emerald-400">•</span><span>Designed and developed core module flows for an Outcome Based Education system using modern web technologies.</span></li>
+                    <li className="flex items-start gap-2"><span className="text-emerald-400">•</span><span>Worked in a team environment with review-driven collaboration and structured handoffs.</span></li>
+                    <li className="flex items-start gap-2"><span className="text-emerald-400">•</span><span>Handled end-to-end deployment execution under senior guidance with release-readiness checks.</span></li>
+                    <li className="flex items-start gap-2"><span className="text-emerald-400">•</span><span>Focused on product quality, maintainable code, and release-readiness discipline.</span></li>
+                  </ul>
                 </div>
               </div>
 
               {/* Info Card 2 */}
-              <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6 space-y-4 hover:border-emerald-500/30 transition-colors duration-300">
+              <div className="bg-linear-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6 space-y-4 hover:border-emerald-500/30 transition-colors duration-300">
                 <h3 className="text-emerald-400 font-bold text-sm">Design Philosophy</h3>
                 <ul className="space-y-2">
                   {[
-                    "Reliability is structural, not reactive",
-                    "Manual processes = bugs unfixed",
-                    "Code review gates prevent incidents",
-                    "Measure everything from day one",
+                    "Reliability starts with architecture",
+                    "Automate repetitive work early",
+                    "Prefer observable, testable systems",
+                    "Build for maintainability, not just speed",
                   ].map((point, idx) => (
                     <li key={idx} className="flex items-start gap-2 text-xs text-slate-400">
-                      <span className="text-emerald-400 flex-shrink-0 mt-1">→</span>
+                      <span className="text-emerald-400 shrink-0 mt-1">→</span>
                       <span>{point}</span>
                     </li>
                   ))}
@@ -124,10 +159,24 @@ export default function LandingPage() {
               </div>
             </motion.div>
           </div>
+
+          <motion.div
+            variants={itemVariants}
+            className="mt-10 flex flex-wrap items-center gap-2"
+          >
+            {signalStrip.map((item) => (
+              <span
+                key={item}
+                className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-emerald-200"
+              >
+                {item}
+              </span>
+            ))}
+          </motion.div>
         </div>
       </motion.div>
 
-      {/* Internship Snapshot Section */}
+      {/* Capability Section */}
       <motion.section
         variants={containerVariants}
         initial="hidden"
@@ -136,73 +185,25 @@ export default function LandingPage() {
         className="border-t border-slate-700/50 px-4 sm:px-6 py-16"
       >
         <div className="max-w-6xl mx-auto">
-          <motion.div variants={itemVariants} className="space-y-10">
+          <motion.div variants={itemVariants} className="space-y-8">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-100 mb-3">The Internship in Numbers</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-100 mb-3">What I Bring</h2>
               <p className="text-slate-400 max-w-2xl">
-                13 weeks. 3 independent projects. One cohesive full-stack story.
+                A Full-Stack and DevOps expertise profile that connects product engineering with release execution, so features can be shipped and operated with confidence.
               </p>
               <div className="h-1 w-12 bg-emerald-400 mt-4"></div>
             </div>
 
-            {/* Metrics Grid */}
-            <MetricsSnapshot
-              metrics={[
-                {
-                  value: "3",
-                  label: "Projects Delivered",
-                  description: "Product delivery → DevOps automation → full-stack systems",
-                  icon: <FaCheckCircle />,
-                },
-                {
-                  value: "0",
-                  label: "Manual Deploys",
-                  description: "100% automated CI/CD pipeline",
-                  icon: <FaCodeBranch />,
-                },
-                {
-                  value: "100",
-                  label: "Lifecycle Coverage",
-                  description: "List, Create, Update, Delete, Status",
-                  icon: <FaTasks />,
-                },
-                {
-                  value: "3",
-                  label: "Environments Live",
-                  description: "Dev, Staging, Production",
-                  icon: <FaCube />,
-                },
-              ]}
-            />
-
-            {/* Timeline */}
-            <div className="mt-12">
-              <h3 className="text-lg md:text-xl font-bold text-slate-100 mb-8">Internship Journey</h3>
-              <InternshipTimeline
-                items={[
-                  {
-                    week: "Week 1–2",
-                    project: "Bloom's Domain Module",
-                    description:
-                      "Built Bloom's Domain configuration screen with CRUD, Zod validation, AG Grid table, modal forms, and business logic (max 3 active domains).",
-                    status: "completed",
-                  },
-                  {
-                    week: "Week 3–5",
-                    project: "CI/CD DevOps Pipeline",
-                    description:
-                      "Architected Jenkins multi-branch pipeline with Docker, Docker Compose, branch protection, staging/production separation, and automated email notifications.",
-                    status: "completed",
-                  },
-                  {
-                    week: "Week 6–13",
-                    project: "Leave Management System",
-                    description:
-                      "Full-stack ownership: React UI with RBAC workflows, Node.js REST APIs, MongoDB integration, role-based approvals (employee/manager/HR), and calendar views.",
-                    status: "upcoming",
-                  },
-                ]}
-              />
+            <div className="grid md:grid-cols-3 gap-5">
+              {capabilityCards.map((item) => (
+                <div
+                  key={item.title}
+                  className="bg-linear-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6 hover:border-emerald-500/40 hover:-translate-y-1 transition-all duration-300"
+                >
+                  <h3 className="text-emerald-400 font-bold text-sm mb-3">{item.title}</h3>
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">{item.description}</p>
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -240,16 +241,16 @@ export default function LandingPage() {
                     "Kubernetes & Terraform production foundations",
                     "AWS Solutions Architect Associate (SAA-C03) cert",
                     "Full-stack systems at IonIdea",
-                    "Open to full-time Full-Stack / DevOps / Cloud roles",
+                    "Open to full-time roles",
                   ],
                 },
               ].map((section, idx) => (
-                <div key={idx} className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6 space-y-4 hover:border-emerald-500/30 transition-colors duration-300">
+                <div key={idx} className="bg-linear-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6 space-y-4 hover:border-emerald-500/30 transition-colors duration-300">
                   <h3 className="text-emerald-400 font-bold text-sm">{section.title}</h3>
                   <ul className="space-y-2">
                     {section.points.map((point, pIdx) => (
                       <li key={pIdx} className="flex items-start gap-2 text-xs text-slate-400">
-                        <span className="text-emerald-400 flex-shrink-0 mt-1">→</span>
+                        <span className="text-emerald-400 shrink-0 mt-1">→</span>
                         <span>{point}</span>
                       </li>
                     ))}
@@ -276,13 +277,13 @@ export default function LandingPage() {
               <div className="h-1 w-12 bg-emerald-400"></div>
             </div>
 
-            <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6">
+            <div className="bg-linear-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6">
               <ul className="space-y-3">
                 {[
                   { cert: "Oracle Cloud Infrastructure 2025 AI Foundations", issuer: "Oracle University", status: "✓" },
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2 text-xs text-slate-400">
-                    <span className="text-emerald-400 flex-shrink-0 mt-0.5">{item.status}</span>
+                    <span className="text-emerald-400 shrink-0 mt-0.5">{item.status}</span>
                     <div>
                       <span className="text-slate-100">{item.cert}</span>
                       {item.issuer && <span className="text-slate-500"> — {item.issuer}</span>}
@@ -310,9 +311,9 @@ export default function LandingPage() {
               <div className="h-1 w-12 bg-emerald-400"></div>
             </div>
 
-            <div className="bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-lg p-6 mb-6">
+            <div className="bg-linear-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-lg p-6 mb-6">
               <p className="text-slate-300 text-sm leading-relaxed">
-                I&apos;m actively looking for full-time <span className="text-emerald-400 font-semibold">Full-Stack / DevOps / Cloud</span> roles. Bengaluru, Pune, Hyderabad — or remote.
+                I&apos;m actively looking for full-time <span className="text-emerald-400 font-semibold">opportunities</span>. Bengaluru, Pune, Hyderabad — or remote.
                 <br />
                 <span className="text-emerald-400">I respond within 24 hours.</span>
               </p>
@@ -348,7 +349,7 @@ export default function LandingPage() {
                     target={contact.href.startsWith("http") ? "_blank" : undefined}
                     rel={contact.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     whileHover={{ y: -4, transition: { duration: 0.3 } }}
-                    className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/10 transition-all duration-300 group"
+                    className="bg-linear-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/10 transition-all duration-300 group"
                   >
                     <Icon className="text-emerald-400 text-xl mb-3 group-hover:scale-125 transition-transform duration-300" />
                     <p className="text-slate-400 text-xs mb-1">{contact.label}</p>

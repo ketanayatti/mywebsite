@@ -15,9 +15,48 @@ const TERMINAL_COMMANDS: Record<
 > = {
   whoami: {
     output: [
-      "Ketan Ayatti — DevOps Engineer",
+      "Ketan Ayatti — Full-Stack and DevOps Expertise",
     ],
     type: "success",
+  },
+  project: {
+    output: [
+      "featured projects",
+      "[1] autonomous-self-healing-platform  ·  zero-downtime blue-green deployment",
+      "[2] self-hosted-aiops-agent           ·  $0 LLM inference on AWS EC2 t2.micro",
+      "[3] communiatec-devops-platform       ·  full CI/CD + Docker + NGINX on Linux",
+      "[4] ai-mock-interview                 ·  branch-aware Jenkins pipeline",
+    ],
+    type: "info",
+  },
+  goal: {
+    output: [
+      "build reliable product systems",
+      "ship features with clean release flow",
+      "keep infrastructure observable and repeatable",
+      "reduce manual ops work through automation",
+    ],
+    type: "success",
+  },
+  works: {
+    output: [
+      "what I work on",
+      "• frontend features and backend APIs",
+      "• CI/CD pipelines and deployment automation",
+      "• Docker, Linux, NGINX, and AWS EC2 workflows",
+      "• monitoring, rollback, and recovery behavior",
+    ],
+    type: "info",
+  },
+  think: {
+    output: [
+      "how I think",
+      "• reliability should be designed, not improvised",
+      "• manual steps are failure points waiting to happen",
+      "• deployment should be predictable and reversible",
+      "• infrastructure is part of the product",
+    ],
+    type: "info",
   },
   status: {
     output: [
@@ -111,10 +150,11 @@ const TERMINAL_COMMANDS: Record<
       "",
       "📊 QUICK COMMANDS:",
       "  whoami                   About me",
-      "  status                   Current hiring status",
-      "  projects --highlight     Highlight projects",
-      "  stack                    Tech stack",
+      "  project                  Featured projects",
+      "  goal                     What I am aiming for",
       "  contact                  Contact info",
+      "  works                    What I work on",
+      "  think                    How I think",
       "",
       "🚀 PROJECT DEEP DIVES:",
       "  aiops                    Self-Hosted AIOps Agent",
@@ -297,12 +337,12 @@ const TERMINAL_COMMANDS: Record<
   about: {
     output: [
       "╔══════════════════════════════════════════════════════════╗",
-      "║           KETAN AYATTI — DevOps Engineer                  ║",
+      "║     KETAN AYATTI — Full-Stack and DevOps Expertise       ║",
       "╚══════════════════════════════════════════════════════════╝",
       "",
       "👤 PERSONAL INFORMATION:",
       "  Name: Ketan Ayatti",
-      "  Role: DevOps Engineer",
+      "  Role: Full-Stack and DevOps",
       "  Company: Ionidea",
       "  Location: Bengaluru, India · Open to Pune, Hyderabad, Remote",
       "  Email: kethanayatti333@gmail.com",
@@ -313,12 +353,12 @@ const TERMINAL_COMMANDS: Record<
       "  Portfolio: ketanayatti.netlify.app",
       "",
       "🎯 EXPERTISE:",
+      "  • Frontend, backend, and deployment workflows",
       "  • Docker & Container Orchestration",
       "  • CI/CD Pipelines (Jenkins, GitHub Actions)",
       "  • AWS Cloud Infrastructure",
-      "  • Infrastructure as Code (Terraform)",
       "  • Linux System Administration",
-      "  • Monitoring & Observability (Prometheus)",
+      "  • Monitoring & Observability",
       "  • Security & Infrastructure Hardening",
       "",
       "🚀 NOTABLE WORK:",
@@ -354,10 +394,11 @@ export default function DevOpsTerminal() {
     if (!isBooted && !booted) {
       const bootSequence = [
         { input: 'whoami', delay: 0 },
-        { input: 'status', delay: 400 },
-        { input: 'projects --highlight', delay: 400 },
-        { input: 'stack', delay: 400 },
+        { input: 'project', delay: 400 },
+        { input: 'goal', delay: 400 },
         { input: 'contact', delay: 400 },
+        { input: 'works', delay: 400 },
+        { input: 'think', delay: 400 },
       ];
 
       let currentIndex = 0;
@@ -443,24 +484,24 @@ export default function DevOpsTerminal() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#c9d1d9] mb-6">Interactive DevOps Playground</h2>
-          <p className="text-[#8b949e] mb-8">
-            Explore deployment commands, infrastructure status, and metrics. Type <span className="text-[#00f5d4] font-mono">help</span> for available commands.
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">Interactive DevOps Playground</h2>
+          <p className="text-muted mb-8">
+            Explore the terminal prompts. Type <span className="text-accent font-mono">help</span> for available commands.
           </p>
 
           {/* Terminal Window */}
-          <div className="bg-[#0a0a0a] border border-[#1b2230] rounded-lg overflow-hidden shadow-2xl">
+          <div className="bg-background border border-border rounded-lg overflow-hidden shadow-2xl">
             {/* Terminal Header */}
-            <div className="bg-[#161b22] border-b border-[#1b2230] px-4 py-3 flex items-center justify-between">
+            <div className="bg-panel border-b border-border px-4 py-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-[#f0883e]" />
                 <span className="w-3 h-3 rounded-full bg-[#f0883e]" />
                 <span className="w-3 h-3 rounded-full bg-[#f0883e]" />
               </div>
-              <span className="text-xs text-[#484f58] font-mono">ketan@devops:~$</span>
+              <span className="text-xs text-dimmed font-mono">ketan@devops:~$</span>
               <button
                 onClick={clearHistory}
-                className="text-xs text-[#8b949e] hover:text-[#c9d1d9] transition-colors"
+                className="text-xs text-muted hover:text-foreground transition-colors"
               >
                 Clear
               </button>
@@ -469,19 +510,19 @@ export default function DevOpsTerminal() {
             {/* Terminal Output */}
             <div
               ref={terminalRef}
-              className="bg-[#0a0a0a] px-6 py-4 font-mono text-sm h-96 overflow-y-auto"
-              style={{ scrollbarWidth: 'thin', scrollbarColor: '#1b2230 #0a0a0a' }}
+              className="bg-background px-6 py-4 font-mono text-sm h-96 overflow-y-auto"
+              style={{ scrollbarWidth: 'thin', scrollbarColor: 'var(--border) var(--background)' }}
             >
               {history.length === 0 ? (
-                <div className="text-[#484f58]">
+                <div className="text-dimmed">
                   <p>Welcome to the DevOps Playground</p>
-                  <p className="mt-2">Type <span className="text-[#00f5d4]">help</span> to see available commands</p>
+                  <p className="mt-2">Type <span className="text-accent">help</span> to see available commands</p>
                 </div>
               ) : (
                 history.map((cmd, idx) => (
                   <div key={idx} className="mb-4">
-                    <div className="text-[#6366f1]">$ {cmd.input}</div>
-                    <div className={cmd.type === "error" ? "text-[#ff6b6b]" : cmd.type === "success" ? "text-[#3fb950]" : "text-[#8b949e]"}>
+                    <div className="text-accent-secondary">$ {cmd.input}</div>
+                    <div className={cmd.type === "error" ? "text-[#ff6b6b]" : cmd.type === "success" ? "text-[#3fb950]" : "text-muted"}>
                       {cmd.output.length === 0 ? (
                         <span> </span>
                       ) : (
@@ -496,9 +537,9 @@ export default function DevOpsTerminal() {
             </div>
 
             {/* Input Area */}
-            <div className="bg-[#0a0a0a] border-t border-[#1b2230] px-6 py-4">
+            <div className="bg-background border-t border-border px-6 py-4">
               <div className="flex items-center gap-2">
-                <span className="text-[#6366f1] font-mono">$ </span>
+                <span className="text-accent-secondary font-mono">$ </span>
                 <input
                   ref={inputRef}
                   type="text"
@@ -510,7 +551,7 @@ export default function DevOpsTerminal() {
                     }
                   }}
                   placeholder="Enter a command..."
-                  className="flex-1 bg-transparent text-[#c9d1d9] font-mono text-sm focus:outline-none placeholder-[#484f58]"
+                  className="flex-1 bg-transparent text-foreground font-mono text-sm focus:outline-none placeholder-dimmed"
                   autoFocus
                 />
                 {input === "" && (
@@ -521,9 +562,9 @@ export default function DevOpsTerminal() {
           </div>
 
           {/* Help Text */}
-          <div className="mt-6 p-4 bg-[#0d1117] border border-[#1b2230] rounded-lg">
-            <p className="text-xs text-[#8b949e] font-mono">
-              # try: <span className="text-[#00f5d4]">whoami</span> · <span className="text-[#00f5d4]">aiops</span> · <span className="text-[#00f5d4]">selfheal</span> · <span className="text-[#00f5d4]">internship</span> · <span className="text-[#00f5d4]">open</span> · <span className="text-[#00f5d4]">help</span>
+          <div className="mt-6 p-4 bg-panel border border-border rounded-lg">
+            <p className="text-xs text-muted font-mono">
+              # try: <span className="text-accent">whoami</span> · <span className="text-accent">project</span> · <span className="text-accent">goal</span> · <span className="text-accent">contact</span> · <span className="text-accent">works</span> · <span className="text-accent">think</span>
             </p>
           </div>
         </motion.div>

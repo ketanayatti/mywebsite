@@ -14,29 +14,29 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ketan Ayatti — DevOps Engineer | AWS · Docker · Kubernetes",
+  title: "Ketan Ayatti — Full-Stack and DevOps Expertise",
   description:
-    "DevOps Engineer building self-healing infrastructure, CI/CD pipelines, and cloud-native systems on AWS. Open to full-time Full-Stack / DevOps / Cloud roles. Based in Bengaluru.",
+    "Full-stack and DevOps expertise portfolio focused on product delivery and implementation work. Based in Bengaluru.",
   keywords: [
-    "DevOps Engineer",
-    "SRE",
-    "Cloud Engineer",
-    "Infrastructure Engineer",
-    "CI/CD",
+    "Full-Stack",
+    "DevOps",
+    "Expertise",
+    "Product Delivery",
+    "Implementation",
+    "Portfolio",
+    "Backend Engineer",
+    "Software Developer",
+    "REST APIs",
     "Docker",
-    "AWS",
-    "Kubernetes",
-    "Jenkins",
-    "Terraform",
     "Linux",
     "Bengaluru",
     "India",
   ],
   authors: [{ name: "Ketan Ayatti" }],
   openGraph: {
-    title: "Ketan Ayatti — DevOps Engineer",
+    title: "Ketan Ayatti — Full-Stack and DevOps Expertise",
     description:
-      "I built a deployment platform that fixes itself. Then ran an LLM on AWS for $0/month.",
+      "Full-stack and DevOps expertise portfolio focused on product delivery and implementation work.",
     type: "website",
     locale: "en_US",
   },

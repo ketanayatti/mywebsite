@@ -39,13 +39,13 @@ export default function ProjectCard({
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6 }}
       whileHover={{ y: -4 }}
-      className="group relative"
+      className="group relative h-full"
     >
       {/* Gradient background on hover */}
       <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
 
       {/* Main card */}
-      <div className={`relative bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-xl ${compact ? "p-4 h-[520px] flex flex-col" : "p-6 md:p-8 space-y-5"} group-hover:border-emerald-500/30 transition-all duration-300`}>
+      <div className={`relative bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-xl h-full flex flex-col ${compact ? "p-4 min-h-[520px]" : "p-6 md:p-8"} group-hover:border-emerald-500/30 transition-all duration-300`}>
         {/* Header with title and status */}
         <div className="flex items-start justify-between gap-4">
           <div>
@@ -65,13 +65,13 @@ export default function ProjectCard({
         </div>
 
         {/* Problem Solved */}
-        <div className={compact ? "space-y-3 flex-1 overflow-hidden" : "space-y-4"}>
-          <div className={compact ? "space-y-3" : "space-y-4"}>
+        <div className="space-y-4 flex-1">
+          <div className="space-y-4">
             <div className={`${compact ? "space-y-1.5 bg-slate-950/40 border border-slate-700/40 rounded-lg p-3" : "space-y-2"}`}>
               <p className="text-emerald-400/70 text-xs font-semibold uppercase tracking-wider">
                 Problem Solved
               </p>
-              <p className={`text-slate-300 text-sm leading-relaxed ${compact ? "line-clamp-3" : ""}`}>
+              <p className={`text-slate-300 text-sm leading-relaxed ${compact ? "line-clamp-3" : "line-clamp-4"}`}>
                 {problemSolved}
               </p>
             </div>
@@ -80,13 +80,13 @@ export default function ProjectCard({
               <p className="text-emerald-400/70 text-xs font-semibold uppercase tracking-wider">
                 Solution Delivered
               </p>
-              <p className={`text-slate-300 text-sm leading-relaxed ${compact ? "line-clamp-3" : ""}`}>
+              <p className={`text-slate-300 text-sm leading-relaxed ${compact ? "line-clamp-3" : "line-clamp-4"}`}>
                 {solutionDelivered}
               </p>
             </div>
           </div>
 
-          <div className={compact ? "space-y-2" : "space-y-3"}>
+          <div className="space-y-3">
             <div className="space-y-2 bg-slate-950/50 rounded-lg p-3">
               <p className="text-emerald-400/70 text-xs font-semibold uppercase tracking-wider">
                 Key Outcomes
@@ -123,7 +123,7 @@ export default function ProjectCard({
             </div>
 
             <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-lg p-3">
-              <p className={`text-slate-300 text-sm leading-relaxed italic ${compact ? "line-clamp-3" : ""}`}>
+              <p className={`text-slate-300 text-sm leading-relaxed italic ${compact ? "line-clamp-3" : "line-clamp-4"}`}>
                 {impact}
               </p>
             </div>

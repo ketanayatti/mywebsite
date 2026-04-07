@@ -1,25 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRef } from "react";
 import DevOpsTerminal from "@/components/DevOpsTerminal";
 import ProjectCard from "@/components/ProjectCard";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaBolt, FaServer, FaShieldAlt } from "react-icons/fa";
 
 export default function OpsPage() {
-  const projectRailRef = useRef<HTMLDivElement | null>(null);
-
-  const scrollProjects = (direction: "left" | "right") => {
-    const offset = direction === "left" ? -420 : 420;
-    projectRailRef.current?.scrollBy({ left: offset, behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -32,6 +19,27 @@ export default function OpsPage() {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
+
+  const opsPillars = [
+    {
+      title: "Release Discipline",
+      description:
+        "Build deployment flows that are repeatable, observable, and safe to run under frequent change.",
+      icon: FaBolt,
+    },
+    {
+      title: "Infrastructure Control",
+      description:
+        "Use containers, proxies, and orchestration patterns to keep runtime behavior predictable.",
+      icon: FaServer,
+    },
+    {
+      title: "Recovery First",
+      description:
+        "Design rollback and watchdog behavior early so failure handling is automatic instead of manual.",
+      icon: FaShieldAlt,
+    },
+  ];
 
   const projects = [
     {
@@ -150,40 +158,69 @@ export default function OpsPage() {
   ];
 
   return (
-    <>
-      {/* Back Button */}
-      <section className="border-b border-slate-700/50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
-          <Link
-            href="/"
-            className="text-emerald-400 hover:text-emerald-300 transition text-xs font-mono"
-          >
-            ← back home
-          </Link>
-        </div>
-      </section>
+    <motion.main
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="relative min-h-screen overflow-hidden bg-slate-950"
+    >
+      <div className="intro-grid pointer-events-none absolute inset-0 opacity-50" />
+      <div className="intro-orb intro-orb-one pointer-events-none" />
+      <div className="intro-orb intro-orb-two pointer-events-none" />
+      <div className="intro-orb intro-orb-three pointer-events-none" />
 
-      {/* Header Section */}
-      <motion.section
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="border-b border-slate-700/50 px-4 sm:px-6 py-12"
-      >
-        <div className="max-w-6xl mx-auto">
-          <motion.div variants={itemVariants} className="space-y-4">
-            <div>
-              <h1 className="text-3xl md:text-4xl font-bold text-slate-100 mb-3">
-                DevOps Report Cards
-              </h1>
-              <p className="text-slate-400 max-w-2xl">
-                Small report cards with problem, solution, impact, tech, and measurable release reliability.
-              </p>
-            </div>
-            <div className="h-1 w-12 bg-emerald-400"></div>
-          </motion.div>
-        </div>
-      </motion.section>
+      <div className="relative z-10">
+        {/* Back Button */}
+        <section className="border-b border-slate-700/50">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
+            <Link href="/" className="text-emerald-400 hover:text-emerald-300 transition text-xs font-mono">
+              ← back home
+            </Link>
+          </div>
+        </section>
+
+        {/* Header Section */}
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="border-b border-slate-700/50 px-4 sm:px-6 py-12"
+        >
+          <div className="max-w-6xl mx-auto">
+            <motion.div variants={itemVariants} className="space-y-6">
+              <div className="space-y-4 max-w-3xl">
+                <p className="text-sm uppercase tracking-[0.32em] text-emerald-400/80">Ops / Infrastructure</p>
+                <h1 className="text-3xl md:text-5xl font-bold text-slate-100 leading-tight">
+                  DevOps systems built for reliability,
+                  <span className="text-emerald-400"> recovery, and repeatable delivery</span>
+                </h1>
+                <p className="text-slate-400 max-w-2xl leading-relaxed">
+                  I design deployment flows, infrastructure patterns, and recovery mechanisms that reduce manual work and keep release behavior predictable.
+                </p>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-3">
+                {opsPillars.map((pillar) => {
+                  const Icon = pillar.icon;
+                  return (
+                    <div
+                      key={pillar.title}
+                      className="bg-linear-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-5 hover:border-emerald-500/30 transition-colors duration-300"
+                    >
+                      <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/15 border border-emerald-500/30 mb-4">
+                        <Icon className="text-emerald-300" />
+                      </div>
+                      <h3 className="text-slate-100 font-bold text-base mb-2">{pillar.title}</h3>
+                      <p className="text-slate-400 text-sm leading-relaxed">{pillar.description}</p>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="h-1 w-12 bg-emerald-400"></div>
+            </motion.div>
+          </div>
+        </motion.section>
 
       {/* Philosophy Section */}
       <motion.section
@@ -203,40 +240,33 @@ export default function OpsPage() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6 space-y-4">
+              <div className="bg-linear-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6 space-y-4">
                 <h3 className="text-emerald-400 font-bold text-base">What I Believe</h3>
                 <ul className="space-y-3">
                   {[
-                    "Automation eliminates technical debt",
-                    "Infrastructure as code always",
-                    "Reliability is architecture, not ops heroics",
-                    "Monitor everything from day one",
-                    "Failures should be automatic, not manual",
+                    "Automation eliminates repetitive operational work",
+                    "Infrastructure as code keeps environments reproducible",
+                    "Reliability is an architecture decision, not heroics",
+                    "Monitoring should guide action, not create noise",
+                    "Failures should be handled by design, not by panic",
                   ].map((point, idx) => (
-                    <li
-                      key={idx}
-                      className="flex items-start gap-3 text-sm text-slate-300"
-                    >
-                      <span className="text-emerald-400 flex-shrink-0 mt-1 font-bold">
-                        →
-                      </span>
+                    <li key={idx} className="flex items-start gap-3 text-sm text-slate-300">
+                      <span className="text-emerald-400 shrink-0 mt-1 font-bold">→</span>
                       <span>{point}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6 space-y-4">
+              <div className="bg-linear-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-6 space-y-4">
                 <h3 className="text-emerald-400 font-bold text-base">
                   DevOps Mindset
                 </h3>
                 <p className="text-sm text-slate-300 leading-relaxed">
-                  Every deployment should be reproducible. Every alert should be
-                  actionable. Every incident should lead to learning and
-                  automation.
+                  Every deployment should be reproducible. Every alert should be actionable. Every incident should lead to learning and automation.
                   <br />
                   <br />
-                  Infrastructure isn't separate from code—it's part of the
+                  Infrastructure isn&apos;t separate from code; it is part of the
                   product.
                 </p>
               </div>
@@ -255,64 +285,32 @@ export default function OpsPage() {
       >
         <div className="max-w-6xl mx-auto">
           <motion.div variants={itemVariants} className="space-y-10">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-3">
-                  Featured Ops Projects
-                </h2>
-                <p className="text-slate-400">
-                  Deployment and infrastructure execution across all major projects.
-                </p>
-                <p className="text-emerald-400/80 text-xs mt-2">Scroll horizontally to explore projects.</p>
-                <div className="h-1 w-12 bg-emerald-400 mt-4"></div>
-              </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <motion.button
-                  type="button"
-                  onClick={() => scrollProjects("left")}
-                  whileHover={{ scale: 1.05, x: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-9 h-9 rounded-full border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10 transition-colors flex items-center justify-center"
-                  aria-label="Scroll projects left"
-                >
-                  <FaChevronLeft size={12} />
-                </motion.button>
-                <motion.button
-                  type="button"
-                  onClick={() => scrollProjects("right")}
-                  whileHover={{ scale: 1.05, x: 2 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-9 h-9 rounded-full border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10 transition-colors flex items-center justify-center"
-                  aria-label="Scroll projects right"
-                >
-                  <FaChevronRight size={12} />
-                </motion.button>
-              </div>
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-3">
+                Featured Ops Projects
+              </h2>
+              <p className="text-slate-400 max-w-2xl">
+                Deployment and infrastructure execution across core projects, organized for faster scanning.
+              </p>
+              <div className="h-1 w-12 bg-emerald-400 mt-4"></div>
             </div>
 
-            <div ref={projectRailRef} className="overflow-x-auto pb-4 scroll-smooth">
-              <div className="flex gap-6 min-w-max snap-x snap-mandatory">
-                {projects.map((project, idx) => (
-                  <motion.div
-                    key={idx}
-                    variants={itemVariants}
-                    viewport={{ once: true, amount: 0.2 }}
-                    className="snap-start shrink-0 w-[88vw] sm:w-[360px] md:w-[390px]"
-                  >
-                    <ProjectCard
-                      title={project.title}
-                      status={project.status}
-                      problemSolved={project.problemSolved}
-                      solutionDelivered={project.solutionDelivered}
-                      metrics={project.metrics}
-                      techStack={project.techStack}
-                      impact={project.impact}
-                      githubUrl={project.githubUrl}
-                      compact
-                    />
-                  </motion.div>
-                ))}
-              </div>
+            <div className="grid lg:grid-cols-2 gap-6 items-stretch">
+              {projects.map((project) => (
+                <motion.div key={project.title} variants={itemVariants} className="h-full">
+                  <ProjectCard
+                    title={project.title}
+                    status={project.status}
+                    problemSolved={project.problemSolved}
+                    solutionDelivered={project.solutionDelivered}
+                    metrics={project.metrics}
+                    techStack={project.techStack}
+                    impact={project.impact}
+                    githubUrl={project.githubUrl}
+                    compact
+                  />
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -340,7 +338,7 @@ export default function OpsPage() {
                 <motion.div
                   key={idx}
                   variants={itemVariants}
-                  className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-4 hover:border-emerald-500/30 transition-colors duration-300"
+                  className="bg-linear-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-lg p-4 hover:border-emerald-500/30 transition-colors duration-300"
                 >
                   <p className="text-emerald-400 font-bold text-sm">
                     {tool.name}
@@ -374,6 +372,7 @@ export default function OpsPage() {
               </p>
               <div className="h-1 w-12 bg-emerald-400 mt-4"></div>
             </div>
+
             <DevOpsTerminal />
           </motion.div>
         </div>
@@ -390,14 +389,14 @@ export default function OpsPage() {
         <div className="max-w-6xl mx-auto">
           <motion.div
             variants={itemVariants}
-            className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-lg p-8 text-center"
+            className="bg-linear-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-lg p-8 text-center"
           >
             <h2 className="text-2xl font-bold text-slate-100 mb-2">
               Ready to build reliable systems together?
             </h2>
             <p className="text-slate-400 mb-6 max-w-2xl mx-auto">
-              I'm open to full-time Full-Stack / DevOps / Cloud roles.
-              Let's talk about infrastructure that scales.
+              I&apos;m open to full-time Full-Stack / DevOps roles.
+              Let&apos;s build product systems that scale and stay reliable.
             </p>
             <Link
               href="/#connect"
@@ -408,8 +407,8 @@ export default function OpsPage() {
           </motion.div>
         </div>
       </motion.section>
-    
 
-    </>
+      </div>
+    </motion.main>
   );
 }
